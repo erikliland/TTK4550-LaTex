@@ -1,16 +1,22 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper, 12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-
 \usepackage[T1]{fontenc}
-\usepackage{libertine}
-\usepackage[libertine]{newtxmath}
 \usepackage[hidelinks]{hyperref}
-\usepackage{amsmath}
-\usepackage{enumitem}
-\usepackage{tocloft}
-\usepackage{siunitx}
 \usepackage{commath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{libertine}
+\usepackage{mortenmath}
+\usepackage{graphicx}
+\usepackage{cite}
+\usepackage{amsmath}
+
+%\usepackage[libertine]{newtxmath}
+%\usepackage{enumitem}
+%\usepackage{tocloft}
+%\usepackage{siunitx}
 
 \title{Multi Target Multi Hypothesis Tracking}
 \author{Erik Liland}
@@ -25,8 +31,6 @@
 
 \input{tex/sec-abstract.tex}
 
-
-
 \newpage
 \tableofcontents
 \newpage
@@ -36,6 +40,11 @@
 \pagenumbering{arabic}
 
 \input{tex/sec-introduction.tex}
-\input{tex/sec-existing_algorithms.tex}
+
+
+\newpage
+\bibliographystyle{ieeetr}
+\bibliography{MHTbib}
+
 
 \end{document}
