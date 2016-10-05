@@ -10,6 +10,18 @@ A tracking system can be interpreted as either the complete system from the sign
 
 There has been developed a large variety of methods to overcome this association problem, and most of them have several sub-methods. In the following subsections, some of the most common and popular methods will be presented.
 
+\subsection{Definitions}
+Scan $\triangleq$ a procedure which measures the entire area of coverage of the system. \newline
+Measurement $\triangleq$ a point in the measurement space where something is detected.\newline
+Score $\triangleq$ a measure of the goodness of a measurement-to-track association. \newline
+Dummy measurement $\triangleq$ a self created measurement at the estimated position (with score 0).\newline
+Measurement list $\triangleq$ a set of measurement who originate from the same scan. \newline
+Target $\triangleq$ an actual object who the system is trying to track. \newline
+Track $\triangleq$ a list of measurement indices, one from each scan, who is believed to originate from the same target. \newline
+Gate $\triangleq$ an area in which a track expects and approves new measurement to associate with itself. \newline
+Track hypothesis $\triangleq$ a new measurement who is inside the gate for an existing track.
+
+
 \subsection{Nearest Neighbour Standard Filter}
 The Nearest Neighbour Standard Filter (NNSF)is the simplest approach in tracking where one always select the closes neighbour as the consecutive measurement in the track. This approach suffers from being very vulnerable from clutter and dense target scenarios, and can be somewhat improved by estimating an a-priori state through a Kalman Filter and selecting the nearest neighbour to the estimate. Even with this extension, it is a very primitive approach which does not yield good real world performance. %Need citeations / corrections
 
@@ -50,7 +62,7 @@ Since the JPDAF is calculating joint probability for all the combinations of mea
 Multiple hypothesis tracking (MHT) is a category of methods that are based around the concept of evaluating multiple  combinations of measurements to data association, and rank them with respect to their statistical properties. In contrast to PDA methods which in some cases will estimate an "average" of two tracks as the true on (coalesce), MHT methods split when in doubt. The original MHT algorithm was presented in \cite{Reid1978}, where a hypothesis oriented MHT was developed. Following this, a track oriented MHT was proposed in \cite{Kurien1990} and improved by \cite{Bar-Shalom2007}.
 
 \subsubsection{Hypothesis Oriented MHT}
-Hypothesis Oriented Multiple Hypothesis Tracker (HOMHT) or Measurement Oriented Multiple Hypothesis Tracker (MOMHT) is on a fully Bayesian approach where direct probabilities of global joint measurement to target association hypothesis are calculated. The algorithm initiates track and handles missing measurements, has a recursive nature and is allows for clustering for quicker calculations. One of the main benefits of MHT is the ability to utilize multiple scans to aid in the data association, in other words to use all the available data when taking decisions. TOMHT was developed under the assumption that no target can originate more than one measurement from each scan, and a target does not necessary show on every scan. When estimating the probability of a hypothesis, the MHT takes into account the false-alarm statistics of the measurement system, the expected density of targets and clutter and the accuracy of the target estimates.
+Hypothesis Oriented Multiple Hypothesis Tracker (HOMHT) or Measurement Oriented Multiple Hypothesis Tracker (MOMHT) is on a fully Bayesian approach where direct probabilities of global joint measurement to target association hypothesis are calculated. The algorithm initiates track and handles missing measurements, has a recursive nature and is allows for clustering for quicker calculations. One of the main benefits of MHT is the ability to utilize multiple scans to aid in the data association, in other words to use all the available data when taking decisions. TOMHT was developed under the assumption that no target can originate more than one measurement from each scan, and a target does not necessary show on every scan. When evaluating the probability of a hypothesis, the MHT takes into account the false-alarm statistics of the measurement system, the expected density of targets and clutter and the accuracy of the target estimates.
 
 The probability of each data association hypothesis was developed by Reid in \cite{Reid1978}
 \begin{equation}
