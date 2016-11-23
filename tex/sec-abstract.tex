@@ -1,4 +1,15 @@
 %!TEX root = ../TTK4550-MHT.tex
 %ABSTRACT
-\section{Abstract}
-Abstract here...
+
+\begin{abstract}
+\addcontentsline{toc}{subsection}{Abstract}
+%\vspace*{\fill}
+\begin{center}
+\emph{\color{red} Tentativ som bare det}
+
+Autonomous surface vessels are, at least in navigational sense, unmanned ships which can be used to transport cargo and people as well as being used for surveillance and other tasks. To ensure a safe journey, the route planer must have a real time image of its surroundings in addition to map data. In the maritime environment, this is primarily done by rotating radars mounted on the ship itself. The challenge then is to know which measurement (reflection) belongs together from scan to scan.
+This report documents a survey of multi target tracking methods with a walk-through of derivations and implementations of an N-scan target oriented multi hypothesis tracker algorithm. The algorithm is able to account for missed targets and false measurements. As each set of measurements (scan) is received, the algorithm predicts the position to its known targets and accepts all measurements inside a certain area around the estimated position. Each of the new measurements are scored based on their distance from the estimated position, the uncertainty of the estimate and the (estimated) amount of clutter in each scan. This method allows for correlation of measurements multiple steps back in time, hence average out white noise. The algorithm was tested and found successful on both simulated data with noise as well as recorded data from a S-band maritime radar.
+\end{center}
+%\vfill
+\end{abstract}
+\newpage

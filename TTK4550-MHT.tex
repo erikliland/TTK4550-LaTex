@@ -12,41 +12,45 @@
 \usepackage{graphicx}
 \usepackage{cite}
 \usepackage{amsmath}
-
-%\usepackage[libertine]{newtxmath}
-%\usepackage{enumitem}
-%\usepackage{tocloft}
-%\usepackage{siunitx}
-
-\title{Multi Target Multi Hypothesis Tracking}
-\author{Erik Liland}
-\date{21.12.2016}
+\usepackage{color}
+\usepackage{csquotes}
+\graphicspath{{Figures/}{./Figures/}}
+\usepackage[refpage]{nomencl} \makenomenclature
+\usepackage{glossaries}\input{tex/nomenclature.tex}
+%\newglossary[alg]{acronym}{acr}{acn}{Acronyms}
+%\newglossaryentry{apc}{name={APC},description={antigeen-presenterende cel}}
+%\newglossaryentry{alg:c1}{type=acronym,name={Entry1},description={Desc1}}
+%\newglossaryentry{alg:c2}{type=acronym,name={Entry2},description={Desc2}}0
+%\newglossaryentry{alg:c3}{type=acronym,name={Entry3},description={Desc3}}
+%\makeglossaries
 
 \begin{document}
+	\pagenumbering{roman}
+	\input{tex/titlepage.tex}
 
-%\maketitle
-%\newpage
+	\addtocounter{page}{1}
+	\input{tex/sec-abstract.tex}
 
-\pagenumbering{roman}
-%\input{tex/sec-abstract.tex}
-%\newpage
+	\tableofcontents \newpage
 
-%\tableofcontents
-\newpage
+	\listoffigures
+	\addcontentsline{toc}{section}{List of Figures} \newpage
 
-%\listoffigures
-%\newpage
+	\printnomenclature
+	\addcontentsline{toc}{section}{Nomenclature} \newpage
+	
+	%\printglossaries
+	%\addcontentsline{toc}{section}{Acronyms} \newpage
 
-%\input{tex/sec-nomenclature.tex}
-%\newpage
-
-\pagenumbering{arabic}
-\input{tex/sec-introduction.tex}
-\input{tex/sec-linear_programming.tex}
-
-\newpage
-\bibliographystyle{ieeetr}
-\bibliography{MHTbib}
-
-
+	\pagenumbering{arabic}	
+	\input{tex/sec-introduction.tex}
+	\input{tex/sec-survey_of_methods.tex} 
+	\input{tex/sec-algorithm_walkthrough.tex}
+	\input{tex/sec-linear_programming.tex}
+	\input{tex/sec-results.tex}
+	\input{tex/sec-discussion.tex}
+	\input{tex/sec-conclusion.tex} \newpage
+	
+	\bibliographystyle{ieeetr}
+	\bibliography{MHTbib}
 \end{document}

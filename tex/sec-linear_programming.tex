@@ -1,8 +1,9 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Linear programming}
+\label{sec:ilp}
 The aim of this section is to elaborate the use of linear programming to solve the data association problem in MHT that arises when there are multiple (possible mutual exclusive) possibilities of measurement arrangements within the existing set of tracks. As with any optimization problem, we need an objective function which tells us how good or bad a given assignment is, and a set of constraints that limits the solution to the physical limits and our assumptions.
 
-\subsection{Objective function}
+\subsection{Problem formulation}
 Storms and Spieksma \cite{Storms2003} are suggesting an Integer Linear Programming (ILP) scheme with Linear Programming (LP) relaxation and Greedy Rounding Procedure (GRP) as solvers. 
 \begin{equation}
 \begin{aligned}
@@ -25,7 +26,7 @@ where,
 \begin{split}
 	\Delta_{i_k} 	&= 
 		\begin{cases} 
-			1, i_k=0 (\text{dummyreport}) \\ 
+			1, i_k=0 (\text{dummy-report}) \\ 
 			0, \text{otherwise} 
 		\end{cases} \\
 	P_\phi^k 		&=
@@ -35,7 +36,7 @@ where,
 		\end{cases} \\
 	\nu_{i_k}^k 	&=
 		\begin{cases} 
-			1, z_{i_k}^k \text{initriates a track} \\ 
+			1, z_{i_k}^k \text{initiates a track} \\ 
 			0, \text{otherwise} 
 		\end{cases} \\
 	\delta_{i_k}^k 	&=
@@ -44,8 +45,8 @@ where,
 			0, \text{otherwise} 
 		\end{cases} \\
 	P_d 			&= \text{probability of detection} \\
-	\lambda_\varphi &= \text{expexted number of false alarms (Poisson distr.)} \\
-	\lambda_\nu		&= \text{expected number of new targets (Poisson distr.)} \\
+	\lambda_\varphi &= \text{expected number of false alarms (Poisson distribution)} \\
+	\lambda_\nu		&= \text{expected number of new targets (Poisson distribution)} \\
 	f_\nu^k 		&= f_\varphi^k = \frac{1}{\pi r^2}, \text{where r is the sensor range} \\
 	f_\delta^k 		&= \frac{e^{-\frac{1}{2}[z_{i_k}^k-h(\bar{s}(t_k))]^T B^{-1} [z_{i_k}-h(\bar{s}(t_k))] }}{\sqrt{(2\pi)^n |B|}} \\
 	n 				&= \text{dimension of measurement vector} \\
@@ -56,47 +57,73 @@ where,
 \end{equation*}
 This approach uses a rather inelegant summation notation which is not on a standard (I)LP format. 
 
-A more compact formulation of the data association problem is proposed on a ILP standard form
+In this work we propose a more compact formulation of the data association problem on ILP standard form.
 \begin{equation}
 \begin{aligned}
 &	\underset{}{\text{maximize}}
 &&	\V{c}^T \V{x} \\
 &	\text{s.t.}
-&&	\M{A_1} \V{x} = \V{b_1} 	\\
+&&	\M{A_1} \V{x} \leq \V{b_1} 	\\
 &&&	\M{A_2} \V{x} = \V{b_2}	\\
 &&&	\V{x} \in \{0,1\}
 \end{aligned}
 \end{equation}
-where $\M{A_1}$ is a $N_1 \times M$ matrix with $N_1$ real measurements and $M$ track hypotheses (all leaf nodes), where $\M{A_1}(i,j)=1$ if hypothesis $j$ are utilizing measurement $i$, $0$ otherwise. $\M{A_2}$ is a $N_2 \times M$ binary matrix where $N_21$ is the number of targets in the cluster and $\M{A_2}(i,j)=1$ if hypothesis $j$ belongs to target $i$. $\V{b_1}$ is a $N_1$ long vector with ones, $\V{b_2}$ is a $N_2$ long vector with ones. $\V{c}$ is a $N$ long vector with a measure of the goodness of the track hypotheses. For example in figure \ref{fig:example1} at time step 2, the A matrix  and C vector would be
-\begin{equation}
-\M{A_1} =\begin{bmatrix}
-		0 & 1 & 0 & 0 & 0\\
-       	0 & 0 & 1 & 0 & 1
-     	\end{bmatrix}
-\M{A_2} =\begin{bmatrix}
-		1 & 1 & 1 & 0 & 0\\
-       	0 & 0 & 0 & 1 & 1
-     	\end{bmatrix}
-\V{c} =\begin{bmatrix}
-		\lambda_1 \\ \lambda_2 \\ \lambda_3 \\ \lambda_4
-		\end{bmatrix}
-\end{equation}
-
-\subsection{Score function}
-An alternative score function was proposed in \cite{Bar-Shalom2007} was the Negative Logarithmic Likelihood Ratio (NLLR) for each hypothesis assignment.
+Where $\M{A_1}$ is a $N_1 \times M$ binary matrix with $N_1$ real measurements and $M$ track hypotheses (all leaf nodes), where $\M{A_1}(i,j)=1$ if hypothesis $j$ are utilizing measurement $i$, $0$ otherwise. The measurements and hypothesis are indexed by the order they are visited by a depth first search (DFS). $\M{A_2}$ is a $N_2 \times M$ binary matrix where $N_2$ is the number of targets in the cluster and $\M{A_2}(i,j)=1$ if hypothesis $j$ belongs to target $i$. $\V{b_1}$ is a $N_1$ long vector with ones and $\V{b_2}$ is a $N_2$ long vector with ones. $\V{c}$ is a $N$ long vector with a measure of the goodness of the track hypotheses. For example in Figure \ref{fig:hyp-tree} at time step 2, the A matrices  and C vector would be:
 \begin{equation}
 \begin{split}
-NLLR_{t,j}(k) &= \frac{1}{2} \left[ \tilde{y}_k^T S_{tj}(k)^{-1} \tilde{y}_k \right] + \ln \frac{\lambda_{ex} |2 \pi S_{tj}(k)|^{1/2}}{P_{D_t}(k)} \\				
-\tilde{y}_k &= z_j(k)-\hat{z}_t(k|k-1)
+\M{A_1} &=\begin{bmatrix}
+		0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\
+       	0 & 0 & 1 & 0 & 0 & 1 & 0 & 1 & 0 \\
+       	0 & 0 & 0 & 1 & 0 & 0 & 1 & 1 & 1 \\
+       	0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+     	\end{bmatrix}
+\V{b_1} = 	\begin{bmatrix}
+			1 \\ 1  \\ 1 \\ 1
+			\end{bmatrix} \\
+\M{A_2} &=\begin{bmatrix}
+		1 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+       	0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 1 \\
+     	\end{bmatrix} 
+\V{b_2} = 	\begin{bmatrix}
+			1 \\ 1
+			\end{bmatrix} \\
+\V{c} &=\begin{bmatrix}
+		\lambda_1 & \lambda_2 & \lambda_3 & \lambda_4 & \lambda_5 & \lambda_6 & \lambda_7 & \lambda_8 & \lambda_9
+		\end{bmatrix}^T \\
 \end{split}
 \end{equation}
-where the cumulative NLLR is
-\begin{equation}
-l_t^k \triangleq \sum_{l=0}^k NLLR_{t,j(t,l)}(l)
-\end{equation}
-.
+
+\begin{figure}
+\centering
+\includegraphics[width = .8\textwidth]{Track-tree}
+\caption{Track hypothesis tree}
+\label{fig:hyp-tree}
+\end{figure}
+
+\subsection{Solvers}
+There are a lot of of-the-shelf integer linear program (ILP) and mixed integer linear program (MILP) solvers on the marked, both free open source and commercial. Since our problem is formulated on standard form, it can easily be executed on several solvers, and we can compare runtime and performance. In this report, the following solver are tested:
+\begin{itemize}
+\item CPLEX 	(Commercial (Free academic),  IBM)
+\item GLPK 		(Free, GNU)
+\item CBC 		(Free, COIN-OR)
+\item SYMPHONY	(Free, COIN-OR)
+\item Gurobi 	(Commercial (Free academic), Gurobi)
+\item Xpress	(Commercial, FICO)
+\end{itemize}
 
 
 
 
-%Innenfor hver cluster, minimere sum av cumulative NLLR til valgte hypotese s.t. at en måling maks er assosiert med et track (og at alle track har nok målinger?)
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,99 @@
+
+%!TEX root = ../TTK4550-MHT.tex
+\section{Survey of multi-target tracking methods}
+\label{sec:survey}
+The aim of this section is to give the reader a brief overview of tracking as a problem and a feeling for the most popular methods, their assumptions and strong and weak properties as seen from an 2D maritime anti collision perspective.
+
+\subsection{Tracking}
+Tracking of an object (target) is the process of estimating its state (i.e. position and velocity) based on discrete measurements from an observation system. An observation system can be a radar, sonar or any other sensor that passively or actively detects objects within an area or volume.
+
+\subsection{Tracking system}
+A tracking system can be interpreted as either the complete system from the signal processing level to the finished tracks, or as in this text: \emph{A system that associates consecutive measurements from an observation system, and initiate or assigns them to tracks.} A track is a subset of all the measurements from the observation system that is believed to originate from the same target. The challenge knowing which measurement originating from which (real) target is the core at any tracking system. This association problem is non-trivial even under ideal situations, and the addition of spurious measurements and missed targets only increases the complexity.
+
+There has been developed a large variety of methods to overcome this association problem, and most of them have several sub-methods. In the following subsections, some of the most common and popular methods will be presented.
+
+\subsection{Nearest Neighbor Filter}
+The Nearest Neighbor Filter (NNF)is the simplest approach in tracking, where one always select the closes neighbor as the consecutive measurement in the track. This approach suffers from being very vulnerable to clutter and dense target scenarios. It can be somewhat improved by estimating an a-priori state through a Kalman Filter and selecting the nearest neighbor to the estimate. This extension is sometimes refereed to as Nearest Neighbor Standard Filter (NNSF). Under the (normal) assumption that each target can at maximum generate one measurement, the NNF and NNSF are both single-target methods. They can however be expanded to multi-target variants by formulating the problem as a global least squares integer optimization problem. With this extension the NNSF is almost becoming a zero-scan multi hypothesis tracker. NNF and NNSF are the only method presented which is non-probabilistic, and does not assume specific models for noise, etc.
+
+\subsection{Probabilistic Data Association Filter}
+Probabilistic Data Association Filter (PDAF) is a \emph{single-target} Bayesian association filter which is based on single scan probabilistic analysis of measurements. At each scan the filter is calculating a most probable measurement based on a weighted sum on the measurement innovations inside a validation region.
+\begin{equation}
+\V{\hat{y}} \triangleq \sum\limits_{j=1}^m \beta_j \V{ \tilde{y}_j }
+\label{PDA_sum}
+\end{equation}
+where
+\begin{equation*}
+\begin{split}
+	\beta_j		&= \text{the probability of measurement j to be the correct one} \\
+	\tilde{y}_j &= y_j - \hat{y}_j \hspace{5mm}	\text{the j-th measurement innovation}
+\end{split}
+\end{equation*}
+PDAF is computationally modest (approximate 50\% more computationally demanding than a Kalman Filter \cite{Bar-Shalom1998} p.163) and have good results in an environment with up to about 5 false measurement in a $4\sigma$ validation region \cite{Bar-Shalom1998}. PDAF does not include track initialization and assumes that at most one measurement can originate from an actual target. It also assumes that clutter is uniformly distributed in the measurement space and that the targets history is approximated by a Gaussian with a calculated mean and covariance (single scan).
+
+PDAF can be used for multiple targets, but only as multiple copies of the single-target filter \cite{Fortmann1983}. Since PDAF is generating a "best guess"-measurement from all the measurements inside its validation region, it can suffer from track coalescence. This coalescence occurs when two targets have similar paths, and the resulting tracks will be an "average" of the two (actual) tracks. There has been done some work to overcome this coalescence \cite{Blom2000}.
+
+
+\subsection{Joint Probabilistic Data Association Filter}
+Joint Probabilistic Data Association Filter (JPDAF) is a \emph{multi-target} extension of the Probabilistic Data Association Filter in which joint posteriori association probabilities are calculated for every target at each scan. Both PDAF and JPDAF use the same weighted sum (\ref{PDA_sum}), the key difference is the way the weight $ \beta_j $ is calculated. Whereas PDAF treats all but one measurement inside its validation region as clutter, in JPDAF the targets which interacts (one cluster) are treated as connected and the connected $ \beta_j $s are computed jointly across the cluster set with a given set of active targets inside the cluster. The probability of a measurement $j$ belonging to a target
+$ t $ is \cite{Fortmann1983}
+\begin{equation}
+\begin{split}
+\beta_j^t &= \sum_{\chi} P\{ \chi | Y^k \} \hat{\omega}_{jt}(\chi) \\
+\beta_0^t &= 1 - \sum_{j=1}^m \beta_j^t
+\end{split}
+\end{equation}
+where
+\begin{equation}
+P\{\chi|Y^k\} = \frac{C^\phi}{c} 
+				\prod_{j:\tau_j=1} \frac{exp[-\frac{1}{2}(\V{\tilde{y}_j^{t_j}})^T S_{t_j}^{-1}(\V{\tilde{y}^{t_j}})]}{(2\pi)^{M/2} |S_{t_j}|^{1/2}}
+				\prod_{t:\delta_t=1} P_D^t
+				\prod_{t:\delta_t=0} (1 - P_D^t).
+\end{equation}
+Where 
+\begin{equation*}
+\begin{split}
+	\beta_j^k			&= \text{the probability that measurement j belongs to target k} \\
+	\beta_0^k 			&= \text{the probability that no measurement belongs to target k} \\
+	\chi 				&= \text{All feasible events} \\
+	Y^k 				&= \text{all candidate measurements up to and included time k} \\
+	\hat{\omega}_{jt}	&=	\begin{cases}
+								1, \text{if } \chi_{jt} \text{ occurs} \\ 
+								0, \text{otherwise} 
+							\end{cases} \\
+	m					&= \text{number of measurements}
+\end{split}
+\end{equation*}
+Since the JPDAF is calculating joint probability for all the combinations of measurement associations in the cluster, the computation demand is growing exponentially with the numbers of tracks and measurements in the cluster. A real time implementation of the JPDAF has been developed and patented by QinetiQ \cite{QinetiQ2003}, and described in \cite{Horridge}, and an approach for avoiding track coalescence has been proposed by \cite{Blom2000}.
+
+\subsection{Multi Hypothesis Tracker}
+Multiple hypothesis tracking (MHT) is a category of methods that are based around the concept of evaluating multiple combinations of measurements to data association, and rank them with respect to their score. In contrast to PDA methods which in some cases will estimate an "average" of two tracks as the true on (coalesce), MHT methods split when in doubt. The original MHT algorithm was presented in \cite{Reid1978}, where a hypothesis oriented MHT was developed. Following this, a track oriented MHT was proposed in \cite{Kurien1990} and improved by \cite{Bar-Shalom2007}.
+
+\subsubsection{Hypothesis Oriented MHT}
+Hypothesis Oriented Multiple Hypothesis Tracker (HOMHT) or Measurement Oriented Multiple Hypothesis Tracker (MOMHT) is a fully Bayesian approach where direct probabilities of global joint measurement-to-target association hypothesis are calculated. The algorithm initiates tracks and handles missing measurements, it has a recursive nature and it allows for clustering for quicker computation. One of the main benefits of MHT is the ability to utilize multiple scans (history) to aid in the data association, in other words to use all the available data when taking decisions. TOMHT was developed under the assumption that at most one measurement can originate from each target in each scan, and that a target does not necessary show on every scan (Probability of detection, $P_D < 1$). When evaluating the probability of a hypothesis, the MHT takes into account the false-alarm statistics of the measurement system, the expected density of targets and clutter and the accuracy of the target estimates.
+
+The probability of each data association hypothesis was developed by Reid in \cite{Reid1978}
+\begin{equation}
+P_i^k = \frac{1}{c} P_D^{N_{DT}}(1-P_D)^{(N_{TGT}-N_{DT})} \beta_{FT}^{N_{FT}} \beta_{NT}^{N_{NT}} \left[ \prod_{m=1}^{N_{DT}} N(\V{Z_m}-\M{H}\V{\bar{x}},\M{B}) \right] P_g^{k-1}
+\end{equation}
+where 
+\begin{equation*}
+\begin{split}
+	P_i^k		&= \text{the probability of hypothesis $\Omega_i^k$ given measurements up through time $k$} \\
+	P_D 		&= \text{the probability of detection} \\
+	\beta_{FT} 	&= \text{the density of targets} \\
+	\beta_{NT}	&= \text{the density of previously unknown targets that have been detected} \\
+	N_{DT} 		&=	\text{number of designated target} \\
+	N_{FT} 		&= \text{the number of false targets} \\
+	N_{NT} 		&= \text{the number of new targets} \\
+	N_{TGT} 	&= \text{is the number of targets} \\
+	\V{Z_m} 	&= \text{the m-th measurement in the current scan} \\
+	\M{H} 		&= \text{the observation matrix} \\
+	\M{B} 		&= \text{the measurement covariance}
+\end{split}
+\end{equation*}
+
+\subsubsection{Track Oriented MHT}
+Track Oriented Multiple Hypothesis Tracker (TOMHT) is a "bottom-up" approach where the tracks are assumed initialized, and for each scan the track splits whenever there are more than one feasible measurement in the validation region (in addition to the no-measurement hypothesis). The new track hypothesis state is generated from the posteriori filtered estimate from a Kalman Filter, and a score/cost is calculated using (20) from \cite{Bar-Shalom2007}. Following the addition of a new track hypothesis, the tracks are divided into clusters where all tracks which share measurements from the N-latest scan are in one cluster. The clusters can then be analyzed as standalone global problems to find the beast possible combination of (possibly mutual exclusive) measurement associations. Linear programming (LP)- and Integer Linear Programming (ILP)-based methods as proposed by \cite{Storms2003} can be used to find the best combinations of newly created track hypotheses in accordance to the assumption that a measurement only can be assigned to one target and that one target can maximally create one measurement.
+
+To limit the size of the track hypothesis tree, the unused edges of the track hypothesis tree will be removed after N scans.
+

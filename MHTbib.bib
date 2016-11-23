@@ -1,39 +1,3 @@
-@article{Averbuch1991,
-author = {A., Averbuch and S., Itzikowitz and T., Kapon},
-doi = {10.1590/0074-02760160291.Running},
-file = {:C$\backslash$:/Users/eriklil/OneDrive/02 NTNU/01 Fag/TTK4550 Prosjekt/01 Papers/00081437.pdf:pdf},
-journal = {Ieee Transactions On Aerospace And Electronic Systems},
-number = {3},
-pages = {66},
-title = {{Radar Target Tracking - Viterbi versus IMM}},
-volume = {27},
-year = {1991}
-}
-@article{Angelova2006,
-abstract = {This paper considers the problem of joint maneuvering target tracking and classification. Based on recently proposed Monte Carlo techniques, a multiple model (MM) particle filter and a mixture Kalman filter (MKF) are designed for two-class identification of air targets: commercial and military aircraft. The classification task is carried out by processing radar measurements only, no class (feature) measurements are used. A speed likelihood function for each class is defined using a prior information about speed constraints. Class-dependent speed likelihoods are calculated through the state estimates of each class-dependent tracker. They are combined with the kinematic measurement likelihoods in order to improve the classification process. The two designed estimators are compared and evaluated over rather complex target scenarios. The results demonstrate the usefulness of the proposed scheme for the incorporation of additional speed information. Both filters illustrate the opportunity of the particle filtering and mixture Kalman filtering to incorporate constraints in a natural way, providing reliable tracking and correct classification. Future observations contain valuable information about the current state of the dynamic systems. In the framework of the MKF, an algorithm for delayed estimation is designed for improving the current modal state estimate. It is used as an additional, more reliable information in resolving complicated classification situations. ?? 2005 Elsevier Inc. All rights reserved.},
-author = {Angelova, Donka and Mihaylova, Lyudmila},
-doi = {10.1016/j.dsp.2005.04.007},
-file = {:C$\backslash$:/Users/eriklil/OneDrive/02 NTNU/01 Fag/TTK4550 Prosjekt/01 Papers/1-s2.0-S1051200405000679-main.pdf:pdf},
-isbn = {1051-2004},
-issn = {10512004},
-journal = {Digital Signal Processing: A Review Journal},
-keywords = {Joint tracking and classification,Maneuvering target tracking,Mixture Kalman filtering,Multiple models,Particle filtering},
-number = {2},
-pages = {180--204},
-title = {{Joint target tracking and classification with particle filtering and mixture Kalman filtering using kinematic radar information}},
-volume = {16},
-year = {2006}
-}
-@incollection{Melorose2015,
-address = {New York},
-author = {Bar-Shalom, Yaakov and Fortmann T. E.},
-booktitle = {Tracking and Data Association},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/bar-shalom - chapter01.pdf:pdf},
-pages = {1--84},
-publisher = {Academic},
-title = {{Chapter 1 Introduction}},
-year = {1988}
-}
 @article{Bar-Shalom2007,
 abstract = {This paper discusses several theoretical issues related to the score function for the measurement-to-track association/assignment decision in the track-oriented version of the multiple hypothesis tracker (MHT). This score function is the likelihood ratio: the ratio of the probability density function (pdf) of a measurement having originated from a track, to the pdf of this measurement having a different origin. The likelihood ratio score is derived rigorously starting from the fully Bayesian MHT (hypothesis oriented, based on combinatorial analysis of the general multitarget problem), which is shown to be amenable under some (reasonable) assumptions to the track-oriented MHT (TOMHT). The latter can be implemented efficiently using multidimensional assignment (MDA). The main feature of a likelihood ratio is the fact that it is a (physically) dimensionless quantity and, consequently, can be used for the association of different numbers of measurements and/or measurements of different dimension. The explicit forms of the likelihood ratio are discussed both for the commonly used Kalman tracking filter, as well as for the interacting multiple model (IMM) estimator. The issues of measurements of different dimension and different coordinate systems together with the selection of certain MHT design parameters - the spatial densities of the false measurements and new targets - are also discussed},
 author = {Bar-Shalom, Yaakov and Blackman, Sam S. and Fitzgerald, Robert J.},
@@ -58,17 +22,6 @@ publisher = {Academic},
 title = {{Algorithms for Tracking A Single Target In Clutter}},
 year = {1998}
 }
-@incollection{Bar-Shalom1988,
-address = {New York},
-author = {Bar-Shalom, Yaakov and Fortmann, Thomas E.},
-booktitle = {Tracking and Data Association},
-chapter = {6},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/bar-shalom - chapter06.pdf:pdf},
-pages = {307--372},
-publisher = {Academic},
-title = {{Algorithms For Tracking A Single Target In Clutter}},
-year = {1988}
-}
 @article{Blackman2004,
 abstract = {Multiple hypothesis tracking (MHT) is generally accepted as the preferred method for solving the data association problem in modern multiple target tracking (MTT) systems. This paper summarizes the motivations for MHT, the basic principles behind MHT and the alternative implementations in common use. It discusses the manner in which the multiple data association hypotheses formed by MHT can be combined with multiple filter models, such as used by the interacting multiple model (IMM) method. An overview of the studies that show the advantages of MHT over the conventional single hypothesis approach is given. Important current applications and areas of future research and development for MHT are discussed.},
 author = {Blackman, S.S.},
@@ -85,58 +38,41 @@ url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=1263228},
 volume = {19},
 year = {2004}
 }
-@article{Blom2000,
-author = {Blom, Henk A P and Bloem, Edwin A},
+@incollection{Blackman1999,
+abstract = {An overview of the state in design and implementation of advanced tracking for single and multiple sensor systems. The text provides evaluations of sensor management, kinematic and attribute data processing, data association, situation assessment, and modern tracking and data fusion methods as applied in both military and non-military arenas. The book offers full coverage of tracking topics such as passive ranging and interactive multiple model (IMM) filtering; multiple hypothesis tracking (MHT) data association; Bayesian and Dempster-Shafer attribute fusion; multiple sensor tracking methods for distributed systems such as space-based surveillance systems; use of tracking data for situation assessment and sensor management; track fusion and track-before-detect (TBD) methods; and efficient allocation of agile beam radar resources. It also covers the interpretation and optimisation of tracker data, and solves the problems associated with algorithm choice and design.},
+author = {Blackman, Sam S. and Robert, Popoli},
+booktitle = {Design and Analysis of Modern Tracking Systems},
+chapter = {6},
+file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/blackman - chapter06.pdf:pdf},
+title = {{Basic Methods for Data Association}},
+year = {1999}
+}
+@inproceedings{Blom2000,
+abstract = {For the problem of tracking multiple targets, the joint probabilistic data association (JPDA) approach has shown to be very effective in handling clutter and missed detections. The JPDA, however, tends to coalesce neighboring tracks and ignores the coupling between those tracks. Fitzgerald [6] has shown that hypothesis pruning may be an effective way to prevent track coalescence. Unfortunately, this process leads to an undesired sensitivity to clutter and missed detections, and it does not support any coupling. To improve this situation, the paper follows a novel approach to combine the advantages of JPDA, coupling, and hypothesis pruning into new algorithms. First, the problem of multiple target tracking is embedded into one filtering for a linear descriptor system with stochastic coefficients. Next, for this descriptor system, the exact Bayesian and new JPDA filters are derived. Finally, through Monte Carlo simulations, it is shown that these new PDA filters are able to handle coupling and insensitive to track coalescence, clutter, and missed detections.},
+author = {Blom, Henk A P and Bloem, Edwin},
+booktitle = {IEEE Transactions on Automatic Control (2000)},
 file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/2016{\_}09{\_}12/CPDApaperComments.pdf:pdf},
+isbn = {0780375165},
+keywords = {Bayesian filtering,abilistic data association,descriptor system,joint prob-,multitarget tracking},
 number = {2},
 pages = {247--259},
-title = {{Track Coalescence}},
+title = {{Probabilistic Data Association Avoiding Track Coalescence}},
 volume = {45},
-year = {2000}
+year = {200}
 }
-@book{Brekke2010,
-abstract = {Traditionally, the literature on target tracking assumes that the targets of interest are em- bedded in homogenous Rayleigh distributed background noise. It is most often assumed that purely kinematic point measurements are extracted from the sensor images, so that the tracking problem can be phrased in terms of data association. The tracker has to de- cide which point measurements are likely to have been caused by the target, and update the track correspondingly. All other measurements are discarded as clutter. This thesis concerns clutter which does not conform to this framework. The follow- ing three challenges are addressed: dim targets, heavy-tailed clutter and wakes. For very dim targets it is impossible to extract point measurements, and tracking can only be done by working directly on the raw sensor images. Several methods for such track-before-detect can be found in the literature. In recent years methods based on sequential Monte Carlo have gained strong popularity. This thesis demonstrates that such methods cannot be expected to perform well unless the amplitudes of sensor cells are treated in a robustway. More precisely, it is demonstrated that a satisfactory performance only can be achieved when the uncertainty of the background noise estimate is taken into account. This is done by means of marginalization over a flat prior distribution for the unknown background power. Similar issues arise in the treatment of heavy-tailed clutter. A heavy-tailed back- ground is a background which generates more frequent occurrences of target-like out- liers than what one would expect under the Rayleigh assumption. In other words, more false alarms must be accepted if we shall have any hope of detecting the target, and this causes an inevitable degradation of performance. This thesis presents the first systematic study of this performance loss from a target tracking point of view. It is demonstrated that the performance loss may be substantially mitigated by usage amplitude informa- tion, depending on how this information is treated},
-author = {Brekke, Edmund F{\o}rland},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/brekke phd thesis 2010 clutter mitigation for target tracking.pdf:pdf},
-isbn = {9788247122297},
-title = {{Clutter mitigation for target tracking}},
-url = {http://arl.nus.edu.sg/twiki/pub/ARL/BibEntries/Brekke{\_}phd{\_}thesis.pdf},
-year = {2010}
-}
-@article{Brekke2016,
-author = {Brekke, Edmund F{\o}rland},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/mtt.pdf:pdf},
-title = {{A survey on multitarget tracking methods}},
-year = {2016}
-}
-@article{Brekke2014,
-author = {Brekke, Edmund and Chitre, Mandar},
-doi = {10.1177/0278364914545674},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/2016{\_}09{\_}12/The International Journal of Robotics Research-2015-Brekke-43-63.pdf:pdf},
-journal = {The International Journal of Robotics Research},
-keywords = {consistency,data association,finite set statistics,laplace approximation,mht,natural gradient,slam},
-title = {{The International Journal of}},
-year = {2014}
-}
-@article{Brekke,
-author = {Brekke, Edmund and Chitre, Mandar and Member, Senior},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/2016{\_}09{\_}12/fisst-mht.pdf:pdf},
-pages = {1--13},
-title = {{Relationship between Finite Set Statistics and the Multiple Hypothesis Tracker}}
-}
-@article{Challa2001,
-abstract = {Bayesian target classification methods using radar and electronic$\backslash$nsupport measure (ESM) data are considered. A joint treatment of target$\backslash$ntracking and target classification problems is introduced. First, a$\backslash$nmethod for target classification using radar data and class-dependent$\backslash$nkinematic models is presented. Second, a target classification method$\backslash$nusing ESM data is presented. Then, a Bayesian radar and ESM data fusion$\backslash$nalgorithm, referred to as direct identity fusion (DIF), for target$\backslash$nclassification is presented. This algorithm exploits the dependence of$\backslash$ntarget state on target class via the use of class dependent kinematic$\backslash$nmodels but fails to exploit the dependence of target class on target$\backslash$nstate. We then introduce a method, referred to as joint tracking and$\backslash$nclassification (JTC), for treating target tracking and classification$\backslash$nproblems jointly, by exploiting the dependence of target class on target$\backslash$nstate via flight-envelope-dependent classes and the dependence of target$\backslash$nstate on target class via class dependent kinematic models. A$\backslash$ntwo-dimensional example demonstrates the relative merits of these$\backslash$nmethods. It is shown that, while the incorporation of the two-way$\backslash$ndependence between target state and class (i.e., JTC) promises some$\backslash$nbenefits over the method that incorporates only a one-way dependence$\backslash$n(i.e., DIF), there are severe filter implementation difficulties for the$\backslash$nformer. The results also demonstrate that the fusion of information from$\backslash$nradar and ESM sensors via the DIF approach results in improvements over$\backslash$nclassification methods based on either of the individual sensors},
-author = {Challa, Subhash and Pulford, Graham W.},
-doi = {10.1109/7.953266},
-file = {:C$\backslash$:/Users/eriklil/OneDrive/02 NTNU/01 Fag/TTK4550 Prosjekt/01 Papers/00953266.pdf:pdf},
-isbn = {0018-9251},
+@article{Brekke2012,
+abstract = {In this paper we focus on targets which, in addition$\backslash$nto reflecting signals themselves, also have a trailing path behind$\backslash$nthem, called a wake. When the detections are fed to a tracking$\backslash$nsystem like the Probabilistic Data Association Filter, the estimated$\backslash$ntrack can be misled and sometimes lose the real target because of$\backslash$nthe wake. This problem becomes even more severe in multitarget$\backslash$nenvironments where targets are operating close to each other in$\backslash$nthe presence of wakes. To prevent this, we have developed a$\backslash$nprobabilistic model of the wakes in a multitarget environment.$\backslash$nThis model is included in the Joint Probabilistic Data Association$\backslash$nfor both coupled and decoupled filtering. Simulations of two$\backslash$ncrossing targets with wakes show that this modification gives good$\backslash$nresults and the number of lost tracks is significantly reduced.},
+author = {Brekke, Edmund and Hallingstad, Oddvar and Glattetre, John},
+doi = {10.1109/TAES.2012.6178045},
+file = {:C$\backslash$:/Users/eriklil/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Brekke, Hallingstad, Glattetre - 2012 - Improved target tracking in the presence of wakes.pdf:pdf},
+isbn = {9783000248832},
 issn = {00189251},
 journal = {IEEE Transactions on Aerospace and Electronic Systems},
-number = {3},
-pages = {1039--1055},
-title = {{Joint target tracking and classification using radar and ESM sensors}},
-volume = {37},
-year = {2001}
+number = {2},
+pages = {1005--1017},
+title = {{Improved target tracking in the presence of wakes}},
+volume = {48},
+year = {2012}
 }
 @article{Coraluppi2000,
 author = {Coraluppi, Stefano and Carthel, Craig and Luettgen, Mark and Lynch, Susan},
@@ -145,29 +81,6 @@ keywords = {acknowledgement we wish to,and john tsitsiklis of,hybrid systems,mit
 number = {June},
 title = {{All-Source Track and Identity Fusion}},
 year = {2000}
-}
-@article{Danchick1997,
-author = {Danchick, R and Newnam, G E},
-doi = {10.1049/ip-rsn},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/2016{\_}09{\_}12/danchick {\&} newnam - reformulating reids MHT with murty k-best assignment.pdf:pdf},
-pages = {13--22},
-title = {{Reformulating Reid ' s MHT method with generalised Murty K -best ranked linear assignment algorithm}},
-year = {1997}
-}
-@article{Deb1997,
-author = {Deb, Somnath},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/deb et al - generalized SD assignment.pdf:pdf},
-number = {2},
-title = {{A Generalized S -D Assignment Algorithm for Multisensor-Multitarget State Estimation}},
-volume = {33},
-year = {1997}
-}
-@article{Duan,
-abstract = {-To solve the radar target tracking problem with range rate measurements, in which the errors between range and range rate measurements are correlated, a sequential Unscented Kalman filter (SUKF) is proposed in this paper. A pseudo measurement is constructed by block-partitioned Cholesky factorization first, this can keep the range, bearing and elevation (or two direction cosine) measurements unchanged, while the errors between the original range and range rate measurement are decorrelated; then based on the UKF, the bearing, elevation (or two direction cosine) and the pseudo measurement are sequentially processed to enhance the filtering precision and the computational efficiency simultaneously. Validity and consistency of the new proposed algorithm is verified by Monte-Carlo simulation.},
-author = {Duan, Zhansheng and Li, X Rong and Han, Chongzhao and Zhu, Hongyan},
-file = {:C$\backslash$:/Users/eriklil/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Duan et al. - Unknown - Sequential Unscented Kalman Filter for Radar Target Tracking with Range Rate Measurements.pdf:pdf},
-keywords = {EKF,Range rate measurement,Unscented Kalman filter (UKF),radar target tracking,sequential processing},
-title = {{Sequential Unscented Kalman Filter for Radar Target Tracking with Range Rate Measurements}}
 }
 @article{Fortmann1983,
 abstract = {The problem of associating data with targets in a cluttered multi-target environment is discussed and applied to passive sonar tracking. The probabilistic data association (PDA) method, which is based on computing the posterior probability of each candidate measurement found in a validation gate, assumes that only one real target is present and all other measurements are Poisson-distributed clutter. In this paper, a new theoretical result is presented: the joint probabilistic data association (JPDA) algorithm, in which joint posterior association probabilities are computed for multiple targets (or multiple discrete interfering sources) in Poisson clutter. The algorithm is applied to a passive sonar tracking problem with multiple sensors and targets, in which a target is not fully observable from a single sensor. Targets are modeled with four geographic states, two or more acoustic states, and realistic (i.e., low) probabilities of detection at each sample time. A simulation result is presented for two heavily interfering targets illustrating the dramatic tracking improvements obtained by estimating the targets' states using joint association probabilities.},
@@ -183,83 +96,27 @@ url = {http://ieeexplore.ieee.org/xpls/abs{\_}all.jsp?arnumber=1145560$\backslas
 volume = {8},
 year = {1983}
 }
-@article{Grove1997,
-author = {Grove, Pacific},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/blackman - chapter06.pdf:pdf},
-title = {{: I}},
-year = {1997}
-}
-@article{Guignard2003,
-author = {Guignard, M and Garc{\'{i}}a-jurado, Ignacio and Alonso-ayuso, Antonio},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/2016{\_}09{\_}12/Guignard - 2003 - Lagrangean Relaxation.pdf:pdf},
-number = {2},
-pages = {151--228},
-title = {{M. Guignard Lagrangean Relaxation}},
-volume = {11},
-year = {2003}
-}
-@article{Habtemariam2015,
-abstract = {In maritime surveillance, messages from radar and the Automatic Identification System (AIS) receivers are used for vessel trafficking and monitoring. The common trend is to use radars as the primary source of surveillance and AIS as a secondary source with little interaction between these data sets. The AIS messages provide very accurate position estimates associated with ID and other vessel information. However, AIS messages arrive unpredictably and intermittently depending on the type and behavior of the vessel. In addition, the revisit interval of AIS messages could be very large and it may vary from one vessel to another. In this work, a new measurement-level fusion algorithm to combine radar and AIS messages is proposed using the Joint Probabilistic Data Association (JPDA) framework. The proposed method handles AIS ID swaps between vessels and missing IDs while effectively fusing the radar measurements with AIS messages at measurement level. The uncertainty in the AIS ID-to-track assignment is resolved by assigning multiple AIS IDs to a target and updating the ID probabilities using a Bayesian inference with radar measurements, AIS messages and other targets. The performance of the proposed measurement-level fusion is compared with that of the track-to-track fusion. A modified Posterior Cram{\'{e}}r-Rao Lower Bound (PCRLB) is also derived for the variable-rate heterogenous AIS/Radar network. Experimental results based on simulated data demonstrate the performance of the proposed technique.},
-author = {Habtemariam, B. and Tharmarasa, R. and McDonald, M. and Kirubarajan, T.},
-doi = {10.1016/j.sigpro.2014.07.029},
-file = {:C$\backslash$:/Users/eriklil/AppData/Local/Mendeley Ltd./Mendeley Desktop/Downloaded/Habtemariam et al. - 2015 - Measurement level AISradar fusion.pdf:pdf},
-isbn = {9780819490711},
-issn = {01651684},
-journal = {Signal Processing},
-keywords = {Association (JPDA),Automatic,Data,Identification,Information fusion,Joint,Maritime target tracking,Measurement level fusion,Probabilistic,System (AIS)},
-pages = {348--357},
-publisher = {Elsevier},
-title = {{Measurement level AIS/radar fusion}},
-url = {http://dx.doi.org/10.1016/j.sigpro.2014.07.029},
-volume = {106},
-year = {2015}
-}
-@article{Horridge,
+@inproceedings{Horridge,
+abstract = {An assignment problem is considered with the constraint that the same hypothesis cannot be applied to more than one object. We desire efficiency without approximation. Multiple target tracking methods such as the joint probabilistic association filter (JPDAF) motivate us. Methods of solving this assignment problem involving enumerating all possible joint assignments is infeasible except for small problems. A recent approach circumvents this combinatorial explosion by representing the structure of the target hypotheses in a `net' which exploits redundancy in an ordered list of objects us to describe the problem. Here, we generalize this approach to process the objects in a tree structure this exploits conditional independence between subsets of the objects. This gives a substantial computational saving and allows us to consider scenarios which were previously impractical. In particular, we show the feasibility of using an exact JPDAF implementation to track 400 targets},
 author = {Horridge, Paul and Maskell, Simon},
+booktitle = {2006 9th International Conference on Information Fusion, FUSION},
+doi = {10.1109/ICIF.2006.301561},
 file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/2016{\_}09{\_}12/horridge {\&} maskell - realtime tracking of hundreds of target with efficient exact JPDAF.pdf:pdf},
-keywords = {assignment,assignments which do not,data association,estimation,given in section 2,how-,multiple target tracking,mutual exclusion,previously,solving this problem,summing over all joint,violate the constraint,was commonly performed by},
-title = {{Real-Time Tracking Of Hundreds Of Targets With Efficient Exact JPDAF Implementation}}
+isbn = {1424409535},
+keywords = {Assignment,Data association,Estimation,Multiple target tracking,Mutual exclusion},
+title = {{Real-time tracking of hundreds of targets with efficient exact JPDAF implementation}},
+year = {2006}
 }
-@article{Introduction2001,
-author = {Introduction, I},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/kirubarajan et al - efficient multisensor fusion using MDA.pdf:pdf},
-journal = {Ieee Transactions On Aerospace And Electronic Systems},
-number = {2},
-title = {{Efficient Mu ltisensor Fusion Using Multidimensional Data}},
-volume = {37},
-year = {2001}
-}
-@article{Karlsson2000,
-author = {Karlsson, R and Gustafsson, F},
-doi = {10.1049/ic:20010239},
-file = {:C$\backslash$:/Users/eriklil/OneDrive/02 NTNU/01 Fag/TTK4550 Prosjekt/01 Papers/01iee.pdf:pdf},
-journal = {IEE Workshop on Target Tracking},
-number = {3},
-pages = {247--254},
-title = {{Monte Carlo data association for multiple target tracking}},
-year = {2000}
-}
-@article{Loe2008,
-abstract = {Considerable progress has been achieved in recent years with respect to autonomous vehicles. A good example is the DARPA Grand Challenge, a competition for autonomous ground vehicles. None of the competing vehicles managed to complete the challenge in 2004, but returning in 2005, a total of five vehicles were successful. Effective collision avoidance is a requirement for autonomous navigation, and even though much progress has been done, it still remains an open problem. The focus of this thesis is on the development of a collision avoidance system for unmanned surface vehicles (USVs), which is compliant with the International Regula- tions for Avoiding Collisions at Sea (COLREGS). The system is based on a modified version of the Dynamic Window algorithm, taking both acceleration and lateral speeds into account for reactive collision avoidance. Path planning is provided by the Rapidly-Exploring Random Tree (RRT) algorithm, extended to use the A* algorithm as a guide, which significantly increases its efficiency. Extensive simulations have been performed in order to determine the value of the mod- ifications done to the original algorithms, as well as the performance of the total control system. Full-scale experiments have also been carried out in an attempt to verify the results from the simulations. The collision avoidance system performed very well during the simulations, finding near-optimal paths through the environment and evading other vessels in a COLREGS-compliant fashion. In the full-scale experiments, important sen- sor data was erroneous, resulting in reduced avoidance margins. However, the collision avoidance system still kept the controlled vessel safe, showing significant robustness.},
-author = {Loe, {\O}. a. G.},
-file = {:C$\backslash$:/Users/eriklil/OneDrive/02 NTNU/01 Fag/TTK4550 Prosjekt/01 Papers/Loe - Collision Avoidance for unmanned surface vehicles.pdf:pdf},
-number = {June},
-title = {{Collision Avoidance for Unmanned Surface Vehicles}},
-url = {http://ntnu.diva-portal.org/smash/record.jsf?pid=diva2:347606},
-year = {2008}
-}
-@article{Notes1970,
-author = {Notes, Bibliographical},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/bar-shalom - chapter02.pdf:pdf},
-title = {{Jltip and}},
-year = {1970}
-}
-@article{NygrenSupervisor2012,
-abstract = {The NUTS (NTNU Test Satellite) is a satellite being built as a student CubeSat project. The project started in September 2010 as a part of the Norwegian student satellite program run by NAROM (Nor-wegian Centre for Space-related Education). The NUTS project goals are to design, manufacture and launch a double CubeSat by 2014. Using solar panels on 5 of 6 sides of the NUTS CubeSat, we have a lot of attitude determinating informa-tion readily available during much of the periodical orbit. Using three or more solar panels in combination can trigonometrically produce a sun vector. However, treating all inbound sunlight as direct light from the sun leaves the result vulnerable to disturbances like the Earth albedo effect (reflected sunlight from the Earth), which is hard to model and computationally expensive to simulate. Not compensating for this effect can corrupt or introduce large offsets in computed sun vectors. Treating the output current from the solar panels as an angle of 3D inbound light towards the 2D plane of the panel can produce a set of independent mathematical conical shells. Given the cubic shape of the satellite, these independent conical shells can iteratively be combined into sets of two and two or-thogonal conical shells which will produce intersection curves with eachother if the angle of aperture is large enough. Even though the panels are physically spaced apart, it can be shown that without loss of generality, these conical shells can be translated along their respective axis of the satellite BODY frame to have overlapping origins, which we can use to map the convergences of the parabolic intersection curves into two possible inbound sun vectors for each pair of solar panels. Knowing that opposing panels can't be combined to yield valid information, our 5 sides of panels can be combined into 8 different pairs from which we can interpret information. At the time of writing, MATLAB code to display computed sun vectors from conical shell intersections produced by sets of panels in real time has been made and physical experiments are about to commence. Algorithms to compare and evaluate the produced cluster of vectors to extract desired information and suppress disturbance are in the making. Making use of instantaneous and tracked individual vectorial attitudes as well as their rates of change seems promising, but special attention needs to be paid to the Earth albedo effect in attempt to identify and suppress this disturbance.},
-author = {{Nygren Supervisor}, Martin and {Tommy Gravdahl}, Jan},
-file = {:C$\backslash$:/Users/eriklil/OneDrive/02 NTNU/01 Fag/TTK4550 Prosjekt/01 Papers/project{\_}martinnygren{\_}final.pdf:pdf},
-title = {{Using Solar Panels as Sun Sensors on NTNU Test Satellite}},
-year = {2012}
+@incollection{Kurien1990,
+author = {Kurien, Thomas},
+booktitle = {Multitarget-Multisensor Tracking: Application and Advances},
+chapter = {3},
+edition = {First},
+file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/kurienpractical.pdf:pdf},
+pages = {219--245},
+publisher = {Artech House},
+title = {{Issues in the design of practical multitarget tracking algorithms}},
+year = {1990}
 }
 @misc{QinetiQ2003,
 author = {QinetiQ},
@@ -297,15 +154,4 @@ pages = {1067--1085},
 title = {{An LP-based algorithm for the data association problem in multitarget tracking}},
 volume = {30},
 year = {2003}
-}
-@incollection{Kurien1990,
-author = {Kurien, Thomas},
-booktitle = {Multitarget-Multisensor Tracking: Application and Advances},
-chapter = {3},
-edition = {First},
-file = {:C$\backslash$:/Users/eriklil/Dropbox/litteratur/kurienpractical.pdf:pdf},
-pages = {219--245},
-publisher = {Artech House},
-title = {{Issues in the design of practical multitarget tracking algorithms}},
-year = {1990}
 }
