@@ -85,9 +85,18 @@ To avoid calculating the likelihood for all possible combinations of targets and
 \end{gather*}
 Where $\eta$ is the gate size.  Chi-Square value with a given confidence interval and two degrees of freedom. For each measurement inside the region, calculate the a posteriori state and covariance using the "measurement update" equations in the Kalman Filter (\ref{eq:kalman_measurementUpdate}) and create a new hypothesis with this state and covariance as initial.
 
-\begin{figure}[h]
+\begin{table}
+\begin{tabular}{c c c c c c c c}
+Confidence 	& 70\% 	& 80\% 	& 90\% 	& 95\% 	& 97.5\% 	& 99\% 	& 99.5\% \\ \hline
+$\eta^2$ 	& 2.41 	& 3.22 	& 4.61 	& 5.99 	& 7.38 		& 9.21 	& 10.60
+\end{tabular}
+\caption{$\chi^2$ values for two degrees of freedom for selected confidence values}
+\label{tab:chi_square}
+\end{table}
+
+\begin{figure}[ht]
 \centering
-\includegraphics[width = .8\textwidth]{ex1-validationRegion}
+\includegraphics[clip, trim = 1.5cm 1cm 1.5cm 1.5cm,width = .95\textwidth]{ex1-validationRegion}
 \caption{Validation region}
 \label{fig:validation_region}
 \end{figure}
@@ -127,7 +136,7 @@ To keep the computational cost within reasonable limits, it is necessary to limi
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width = .8\textwidth]{Pruned-tree.pdf}
+\includegraphics[clip, trim = 2cm 0cm 2cm 0cm,width = .8\textwidth]{Pruned-tree.pdf}
 \caption{Pruned track hypothesis tree}
 \label{fig:pruned-hyp-tree}
 \end{figure}
