@@ -17,25 +17,25 @@ where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t
 \end{itemize}
 
 \begin{figure}
-    \centering   
+    \centering
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip, trim=2cm 1.5cm 2cm 2cm, height=0.3\textheight]{scenario1}
+        \includegraphics[height=0.3\textheight]{scenario1}
         \caption{First scenario}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip, trim=2cm 1.5cm 2cm 2cm,height=0.3\textheight]{scenario2}
+        \includegraphics[height=0.3\textheight]{scenario2}
         \caption{Second scenario}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip, trim=2cm 1.5cm 2cm 2cm,height=0.3\textheight]{scenario3}
+        \includegraphics[height=0.3\textheight]{scenario3}
         \caption{Third scenario}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip, trim=2cm 1.5cm 2cm 2cm,height=0.3\textheight]{scenario4}
+        \includegraphics[height=0.3\textheight]{scenario4}
         \caption{Fourth scenario}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
@@ -46,8 +46,7 @@ where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t
 \end{figure}
 
 \subsection{Simulation data}
-Scenario one through four is generated as a recording of time and position from an Autonomous Surface Vessel (ASV)-simulator with collision avoidance (COLAV) which is a project under work by D. Kwame Minde Kufolaor at NTNU. The targets are configured such that they need to maneuver to avoid collision with each other, which allows for tracking of maneuvering targets in close proximity to each other. The fifth scenario is generated as a part of this project and is composed by linear parallel paths with hight measurement noise and system uncertainty.
-%The third data-set is generated from Thomas Stenersen ASV simulator which was a part of this masters thesis. This simulator have several different pre-configured scenarios, and can also be modified to create any desired scenario.
+Scenario one through four is generated as a recording of time and position from an Autonomous Surface Vessel (ASV)-simulator with collision avoidance (COLAV) which is a project under work by D. Kwame Minde Kufolaor at NTNU. The targets are configured such that they need to maneuver to avoid collision with each other, which allows for tracking of maneuvering targets in close proximity to each other. These scenarios where sampled at 1 Hz which is a little faster than a normal high speed vessel radar at 0.8 Hz (48 rpm). The fifth scenario is generated as a part of this project and is composed by linear parallel paths with white Gaussian system noise as maneuvering. This data set where sampled at 0.5 Hz which is a little higher that a normal maritime costal radar at 0.4 Hz (24 rpm).
 
 \subsection{Simulations}
 Scenario one through four was simulated with the following variations with all four solvers.
@@ -195,37 +194,36 @@ Each variant was simulated 100 times with different seeded random clutter measur
     \caption{Simulation results for all solvers in scenario 5}
     \label{fig:parallel_targets_cropped}
 \end{figure}
-
-
+From the simulations it can be observed that the different solvers perform practically identically when it comes to track performance. The number of lost tracks is proportional with the clutter level at a rate which is inverse proportional with the probability of detection $P_D$. An interesting observation is the return on investment regarding the number of scans to evaluate (N-scan). For instance, with $P_D=0.7$ the difference between $N=3$ and $N=6$ is marginal, at least when the clutter level is within reasonable levels. With $P_D=0.5$ we see that the pay-off is much higher for the extra computational cost with 15\% improvement between $N=3$ and $N=6$.
 \subsection{Runtime}
+
 \begin{figure}[H]
-    \centering
-    \textbf{Scenario 5}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{dynamic_agents_full_cooperation_cropped_runtime}
-        \caption{Runtime for scenario 1}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{dynamic_agents_partial_cooporation_cropped_runtime}
-        \caption{Runtime for scenario 2}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{dynamic_and_static_agents_large_space_cropped_runtime}
-        \caption{Runtime for scenario 3}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped_runtime}
-        \caption{Runtime for scenario 4}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{parallel_targets_cropped_runtime}
-        \caption{Runtime for scenario 5}
-    \end{subfigure}
-    \caption{Runtimes for scenarios}
-    \label{fig:runtimes}
+\centering
+\includegraphics[width=\textwidth]{dynamic_agents_full_cooperation_cropped_runtime}
+\caption{Scenario 1}
+\label{fig:runtime_scenario_1}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{dynamic_agents_partial_cooporation_cropped_runtime}
+\caption{Scenario 2}
+\label{fig:runtime_scenario_2}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{dynamic_and_static_agents_large_space_cropped_runtime}
+\caption{Scenario 3}
+\label{fig:runtime_scenario_3}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped_runtime}
+\caption{Scenario 4}
+\label{fig:runtime_scenario_4}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{parallel_targets_cropped_runtime}
+\caption{Runtime for scenario 5}
+\label{fig:runtime_scenario_5}
 \end{figure}
