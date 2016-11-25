@@ -53,14 +53,14 @@ Scenario one through four is generated as a recording of time and position from 
 Scenario one through four was simulated with the following variations with all four solvers.
 \begin{equation*}
 \begin{split}
-\V{P_D} &= \begin{bmatrix} 0.5 & 0.7 & 0.9 \end{bmatrix} \\
+\V{P_D} &= \begin{bmatrix} 0.5 & 0.6 & 0.7 & 0.8 & 0.9 \end{bmatrix} \\
 \V{N} &=\begin{bmatrix} 1 & 3 & 6 \end{bmatrix} \\
-\V{\lambda_\phi} &=\begin{bmatrix} 0 & 1\cdot10^{-4} & 2\cdot10^{-4} & 4\cdot10^{-4} \end{bmatrix}
+\V{\lambda_\phi} &=\begin{bmatrix} 0 & 1\cdot10^{-4} & 2\cdot10^{-4} & 4\cdot10^{-4} & 8\cdot10^{-4} \end{bmatrix}
 \end{split}
 \end{equation*}
-Each variant was simulated 100 times with different seeded random clutter measurements and miss detections. For each simulation, the estimated tracks was compared with the true tacks and categorised in successful and lost tracks. Figure \ref{fig:dynamic_agents_full_cooperation_cropped} to \ref{fig:dynamic_and_static_agents_narrow_space_cropped} show the averaged track loss percentage.
+Each variant was simulated 100 times with different seeded random clutter measurements and miss detections. For each simulation, the estimated tracks where compared with the true tacks and categorised in successful and lost tracks, the track loss threshold $\epsilon_p$ was $4$ meters. Figure \ref{fig:dynamic_agents_full_cooperation_cropped} - \ref{fig:dynamic_and_static_agents_narrow_space_cropped} show the averaged track loss percentage.
 
-\subsection{Tracking performance}
+\subsubsection{Tracking performance}
 \begin{figure}[H]
     \centering
     \textbf{Scenario 1}\par \medskip
@@ -84,8 +84,8 @@ Each variant was simulated 100 times with different seeded random clutter measur
         \includegraphics[clip,  trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_agents_full_cooperation_cropped-GUROBI}
         \caption{GUROBI solver}
     \end{subfigure}
-	\label{fig:dynamic_agents_full_cooperation_cropped}
 	\caption{Simulation results for all solvers in scenario 1}
+    \label{fig:dynamic_agents_full_cooperation_cropped}
 \end{figure}
 
 \begin{figure}[H]
@@ -111,8 +111,8 @@ Each variant was simulated 100 times with different seeded random clutter measur
         \includegraphics[clip, trim=0cm 0cm  0cm 2cm,width=\textwidth]{dynamic_agents_partial_cooporation_cropped-GUROBI}
         \caption{GUROBI solver}
     \end{subfigure}
+    \caption{Simulation results for all solvers in scenario 2}
 	\label{fig:dynamic_agents_partial_cooperation_cropped}
-	\caption{Simulation results for all solvers in scenario 2}
 \end{figure}
 
 \begin{figure}[H]
@@ -138,8 +138,8 @@ Each variant was simulated 100 times with different seeded random clutter measur
         \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_large_space_cropped-GUROBI}
         \caption{GUROBI solver}
     \end{subfigure}
+    \caption{Simulation results for all solvers in scenario 3}
 	\label{fig:dynamic_and_static_agents_large_space_cropped}
-	\caption{Simulation results for all solvers in scenario 3}
 \end{figure}
 
 \begin{figure}[H]
@@ -165,21 +165,67 @@ Each variant was simulated 100 times with different seeded random clutter measur
         \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped-GUROBI}
         \caption{GUROBI solver}
     \end{subfigure}
+    \caption{Simulation results for all solvers in scenario 4}
 	\label{fig:dynamic_and_static_agents_narrow_space_cropped}
-	\caption{Simulation results for all solvers in scenario 4}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \textbf{Scenario 5}\par \medskip
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm, width=\textwidth]{parallel_targets_cropped-CBC}
+        \caption{CBC solver}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{parallel_targets_cropped-CPLEX}
+        \caption{CPLEX solver}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{parallel_targets_cropped-GLPK}
+        \caption{GLPK solver}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{parallel_targets_cropped-GUROBI}
+        \caption{GUROBI solver}
+    \end{subfigure}
+    \caption{Simulation results for all solvers in scenario 5}
+    \label{fig:parallel_targets_cropped}
 \end{figure}
 
 
 \subsection{Runtime}
-\subsubsection{Solvers}
-
-\begin{tabular}{ r c c c c c c}
-nHyp 	& CPLEX & GLPK 	& CBC	& SYMPHONY	& Gurobi	& Xpress	\\ \hline
-13 		& 0.111	& 6 	& 6		& 6			& 6			& 6			\\
-34 		& 0.106	& 9		& 9		& 6			& 6			& 6			\\
-78 		& 0.106	& 9		& 9		& 6			& 6			& 6			\\
-87 		& 0.108	& 9		& 9		& 6			& 6			& 6			\\
-162 	& 0.112	& 9		& 9		& 6			& 6			& 6			\\
-189 	& 0.115	& 9		& 9		& 6			& 6			& 6			\\
-423 	& 0.130	& 9		& 9		& 6			& 6			& 6			\\
-\end{tabular}
+\begin{figure}[H]
+    \centering
+    \textbf{Scenario 5}\par \medskip
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{dynamic_agents_full_cooperation_cropped_runtime}
+        \caption{Runtime for scenario 1}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{dynamic_agents_partial_cooporation_cropped_runtime}
+        \caption{Runtime for scenario 2}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{dynamic_and_static_agents_large_space_cropped_runtime}
+        \caption{Runtime for scenario 3}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped_runtime}
+        \caption{Runtime for scenario 4}
+    \end{subfigure}
+    \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{parallel_targets_cropped_runtime}
+        \caption{Runtime for scenario 5}
+    \end{subfigure}
+    \caption{Runtimes for scenarios}
+    \label{fig:runtimes}
+\end{figure}
