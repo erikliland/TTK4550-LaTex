@@ -193,37 +193,38 @@ Each variant was simulated 100 times with different seeded random clutter measur
     \end{subfigure}
     \caption{Simulation results for all solvers in scenario 5}
     \label{fig:parallel_targets_cropped}
-\end{figure}
+\end{figure} 
 From the simulations it can be observed that the different solvers perform practically identically when it comes to track performance. The number of lost tracks is proportional with the clutter level at a rate which is inverse proportional with the probability of detection $P_D$. An interesting observation is the return on investment regarding the number of scans to evaluate (N-scan). For instance, with $P_D=0.7$ the difference between $N=3$ and $N=6$ is marginal, at least when the clutter level is within reasonable levels. With $P_D=0.5$ we see that the pay-off is much higher for the extra computational cost with 15\% improvement between $N=3$ and $N=6$.
 \subsection{Runtime}
+Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays average the runtime for the entire scenario for the different solvers. From these it can be seen that the GLKP solver was the fastest one in general,
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{dynamic_agents_full_cooperation_cropped_runtime}
+\includegraphics[clip, trim=0cm 1.5cm 0cm 0cm, width=\textwidth]{dynamic_agents_full_cooperation_cropped_runtime}
 \caption{Scenario 1}
 \label{fig:runtime_scenario_1}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{dynamic_agents_partial_cooporation_cropped_runtime}
+\includegraphics[clip, trim=0cm 1.5cm 0cm 0cm,width=\textwidth]{dynamic_agents_partial_cooporation_cropped_runtime}
 \caption{Scenario 2}
 \label{fig:runtime_scenario_2}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{dynamic_and_static_agents_large_space_cropped_runtime}
+\includegraphics[clip, trim=0cm 1.5cm 0cm 0cm,width=\textwidth]{dynamic_and_static_agents_large_space_cropped_runtime}
 \caption{Scenario 3}
 \label{fig:runtime_scenario_3}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped_runtime}
+\includegraphics[clip, trim=0cm 1.5cm 0cm 0cm,width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped_runtime}
 \caption{Scenario 4}
 \label{fig:runtime_scenario_4}
 \end{figure}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{parallel_targets_cropped_runtime}
+\includegraphics[clip, trim=0cm 1.5cm 0cm 0cm,width=\textwidth]{parallel_targets_cropped_runtime}
 \caption{Runtime for scenario 5}
 \label{fig:runtime_scenario_5}
 \end{figure}
