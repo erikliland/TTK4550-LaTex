@@ -1,33 +1,5 @@
 \documentclass[a4paper, 12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[hidelinks]{hyperref}
-\usepackage{commath}
-\usepackage{mathtools}
-\usepackage{amssymb}
-\usepackage{mathrsfs}
-\usepackage{libertine}
-\usepackage{mortenmath}
-\usepackage{graphicx}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{cite}
-\usepackage{amsmath}
-\usepackage{color}
-\usepackage{float}
-\usepackage{flafter}
-\usepackage{csquotes}
-\graphicspath{{Figures/}{./Figures/}}
-\usepackage[refpage]{nomencl} \makenomenclature
-\usepackage{glossaries}\input{tex/nomenclature.tex}
-%\newglossary[alg]{acronym}{acr}{acn}{Acronyms}
-%\newglossaryentry{apc}{name={APC},description={antigeen-presenterende cel}}
-%\newglossaryentry{alg:c1}{type=acronym,name={Entry1},description={Desc1}}
-%\newglossaryentry{alg:c2}{type=acronym,name={Entry2},description={Desc2}}0
-%\newglossaryentry{alg:c3}{type=acronym,name={Entry3},description={Desc3}}
-%\makeglossaries
-
+\input{tex/preamble.tex}
 \begin{document}
 	\pagenumbering{roman}
 	\input{tex/titlepage.tex}
@@ -35,16 +7,14 @@
 	\addtocounter{page}{1}
 	\input{tex/sec-abstract.tex}
 
+	\addcontentsline{toc}{subsection}{Table of Contents} 
 	\tableofcontents \newpage
 
-	\listoffigures
-	\addcontentsline{toc}{section}{List of Figures} \newpage
+	\addcontentsline{toc}{subsection}{List of Figures}
+	\listoffigures \newpage
 
-	\printnomenclature
-	\addcontentsline{toc}{section}{Nomenclature} \newpage
-	
-	%\printglossaries
-	%\addcontentsline{toc}{section}{Acronyms} \newpage
+	\addcontentsline{toc}{subsection}{Nomenclature}
+	\printnomenclature \newpage 
 
 	\pagenumbering{arabic}	
 	\input{tex/sec-introduction.tex}
@@ -52,9 +22,11 @@
 	\input{tex/sec-algorithm_walkthrough.tex}
 	\input{tex/sec-linear_programming.tex}
 	\input{tex/sec-results.tex}
-	\input{tex/sec-discussion.tex}
+	\input{tex/sec-discussion.tex} \newpage
 	\input{tex/sec-conclusion.tex} \newpage
-	
+%	\input{tex/appendices.tex} \newpage
+	\addcontentsline{toc}{section}{References}
 	\bibliographystyle{ieeetr}
 	\bibliography{MHTbib}
 \end{document}
+% makeindex TTK4550-MHT.nlo -s nomencl.ist -o TTK4550-MHT.nls

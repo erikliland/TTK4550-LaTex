@@ -1,15 +1,13 @@
 %!TEX root = ../TTK4550-MHT.tex
-%ABSTRACT
 
 \begin{abstract}
 \addcontentsline{toc}{subsection}{Abstract}
-%\vspace*{\fill}
-\begin{center}
-\emph{\color{red} Tentativ som bare det}
+AUTOSEA is a collaborative research and development project between NTNU (Norwegian University of Science and Technology) AMOS (Centre for autonomous marine operations and systems) and the Norwegian maritime industry. The aim of the project is to attain world leading knowledge in design and verification of control systems for autonomous surface vessels (ASVs).
 
-Autonomous surface vessels are, at least in navigational sense, unmanned ships which can be used to transport cargo and people as well as being used for surveillance and other tasks. To ensure a safe journey, the route planer must have a real time image of its surroundings in addition to map data. In the maritime environment, this is primarily done by rotating radars mounted on the ship itself. The challenge then is to know which measurement (reflection) belongs together from scan to scan.
-This report documents a survey of multi target tracking methods with a walk-through of derivations and implementations of an N-scan target oriented multi hypothesis tracker algorithm. The algorithm is able to account for missed targets and false measurements. As each set of measurements (scan) is received, the algorithm predicts the position to its known targets and accepts all measurements inside a certain area around the estimated position. Each of the new measurements are scored based on their distance from the estimated position, the uncertainty of the estimate and the (estimated) amount of clutter in each scan. This method allows for correlation of measurements multiple steps back in time, hence average out white noise. The algorithm was tested and found successful on both simulated data with noise as well as recorded data from a S-band maritime radar.
-\end{center}
-%\vfill
+ASVs are, at least in control and navigational perspective, unmanned vessels which can for instance be used to transport cargo and people as well as for surveillance and other tasks. To ensure a safe journey, the route planer needs a real time image of its surroundings in addition to map data to avoid collision and dangerous situations with other vessels. In the maritime environment, this is primarily done by radars mounted on the ship itself. The challenge is to know which measurement (reflection) belongs together from scan to scan to get a track on each target.
+
+Multiple hypothesis tracking (MHT) is generally the preferred method for solving the data association problem in a multi target scenario where the target dynamics are unpredictable. This report documents a survey of multi target tracking methods, and compare their strengths and weaknesses from a maritime safety perspective.
+
+A target oriented MHT tracking algorithm is implemented in Python, with off-the-shelf integer linear program (ILP) solvers to solve the optimization problem that arise when multiple targets associates the same measurement with is track.
 \end{abstract}
 \newpage

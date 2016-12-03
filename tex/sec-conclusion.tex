@@ -1,2 +1,20 @@
 %!TEX root = ../TTK4550-MHT.tex
-\section{Conclusion}
+\section{Closing remarks}
+\subsection{Conclusion}
+This report has shown that off-the-shelf integer linear program (ILP) solvers, both free and commercial, are capable solving the data association problem in a track oriented multiple hypothesis tracker. It has also shown that the tracking performance does benefit very little from more than $N=3$ scan history when the probability of detection $P_D > 70\%$, even with severe amounts of clutter.
+
+\subsection{Future work}
+Pruning / merge similar state
+
+Prune unlikely hypothesis as long as the problem is still solvable
+
+Parallelization / scaling
+
+Use AIS to aid tracking
+
+\subsubsection{Track initialization}
+- Recursive ransac
+
+- PDA
+
+- Another MHT

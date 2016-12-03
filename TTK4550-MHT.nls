@@ -1,0 +1,30 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{Clutter}]\begingroup Noise in the form of false measurements which is assumed Poison distributed\nomeqref {0}
+		\nompageref{i}
+  \item [{Dummy measurement}]\begingroup a self created measurement at the estimated position (with score 0)\nomeqref {0}
+		\nompageref{i}
+  \item [{Gate}]\begingroup an area in which a track expects and approves new measurement to associate with itself\nomeqref {0}
+		\nompageref{i}
+  \item [{Measurement}]\begingroup a point in the measurement space where something is detected\nomeqref {0}
+		\nompageref{i}
+  \item [{Measurement list}]\begingroup a set of measurement which originate from the same scan\nomeqref {0}
+		\nompageref{i}
+  \item [{Measurement noise}]\begingroup Also called observation noise, which is noise that affects the accuracy of the measurement not the existence. White Gaussian with zero mean and covariance $R$\nomeqref {0}
+		\nompageref{i}
+  \item [{Scan}]\begingroup a procedure which measures the entire area of coverage of the system.\nomeqref {0}
+		\nompageref{i}
+  \item [{Score}]\begingroup a measure of the goodness of a measurement-to-track association\nomeqref {0}
+		\nompageref{i}
+  \item [{System noise}]\begingroup Also called process noise, which is noise in the model behaviour. This noise compensates for the uncertainty and non-modelled dynamics of the true system\nomeqref {0}
+		\nompageref{i}
+  \item [{Target}]\begingroup an actual object which the system is trying to track\nomeqref {0}
+		\nompageref{i}
+  \item [{Track}]\begingroup a list of measurement indices, one from each scan, which is believed to originate from the same target\nomeqref {0}
+		\nompageref{i}
+  \item [{Track hypothesis}]\begingroup a new measurement which is inside the gate for an existing track\nomeqref {0}
+		\nompageref{i}
+
+\end{thenomenclature}
