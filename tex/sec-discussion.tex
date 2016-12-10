@@ -1,13 +1,8 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Discussion}
 \label{sec:discussion}
-\subsection{Track loss performance}
+The field of tracking and data association have been dominated by first military applications and secondly civil aviation control, both of which are areas with hight performance demands and large development contracts. Although much work is published in this topic, few comparisons have been made between actual implementations of different trackers and filters. This is most likely due to the nature of business secrets and military classifications to hide the intricate details that goes into an actual implementation and optimization of any tracking system.
 
-\subsection{Time performance}
+One of the main objective for this work was to examine the feasibility of using off-the-shelf solvers to solve the assignment problem in a MHT system. And does it? The short answer is yes, but with a quite large set of drawbacks. When using off-the-shelf solvers, the assignment problem must be written to a file that the solver can interpreter. This is a major drawback with this approach, but can be partially compensated for with fast solid state storage (SSD) in stead of traditional rotating hard drives. Another major drawback is the need of explicit enumeration of all hypotheses in the ILP formulation, which is costly and in many situations unnecessary. This could possibly be addressed by column generating optimization methods, which starts with a feasible set of columns and adds more and more columns (constraints) until it reaches the optimal assignment. Intuitively this makes sense, since most of the constraints will never be active, and therefore not needed for finding the optimal solution.
 
-
-
-
-\subsection{Track termination}
-
-
+%Graphics Processing Units (GPU's) are hightly parelelized  

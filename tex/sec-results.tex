@@ -3,17 +3,18 @@
 \label{sec:results}
 
 \subsection{Testing scheme}
-The evaluation of the MHT algorithm is two-sided, firstly the algorithm must be able to track under challenging conditions, secondly it must be able to do this without having an ever growing computationally cost. The first performance metric is how well the algorithm is estimating the true position to the object it is tracking. This is measured as the Euclidean distance:
+The evaluation of the MHT algorithm is two-sided, firstly the algorithm must be able to track under challenging conditions, secondly it must be able to do this without having an ever growing computationally cost and run time. The first performance metric is how well the algorithm is estimating the true position to the object it is tracking. This is measured as the Euclidean distance between the estimated and true track:
 \begin{equation}
 	\Delta P = \| \V{p}_{track}-\V{p}_{target} \|_2
 \end{equation}
-where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t after initial convergence. If a track is deviating more that the threshold and is never within the threshold again, it is considered lost at the time-step it exceeded the threshold. If the track should converge after exceeding the threshold, it is considered restored at the time-step it is returning within the limit. The algorithm is tested on five scenarios:
+where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t after initial convergence. If a track is deviating more that the threshold and is never within the threshold again, it is considered lost at the time-step it exceeded the threshold. If the track should converge after exceeding the threshold, it is considered restored at the time-step it is returning within the limit. The algorithm is tested on six scenarios:
 \begin{itemize}
 	\item Five fully cooperating ships
     \item Five partially cooperative ships
     \item Five ships avoiding obstacles with large space
     \item Five ships avoiding obstacles with little space
-	\item Five parallel ships
+	\item Five almost parallel ships (normal speed radar)
+	\item Five almost parallel ships (high speed radar)
 \end{itemize}
 
 \begin{figure}
@@ -53,185 +54,69 @@ where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t
 \end{figure} 
 
 \subsection{Simulation data}
-Scenario one through four is generated as a recording of time and position from an Autonomous Surface Vessel (ASV)-simulator with collision avoidance (COLAV) which is a project under work by D. Kwame Minde Kufolaor at NTNU. The targets are configured such that they need to maneuver to avoid collision with each other, which allows for tracking of maneuvering targets in close proximity to each other. These scenarios where sampled at 1 Hz which is a little faster than a normal high speed vessel radar at 0.8 Hz (48 rpm). The fifth scenario is generated as a part of this project and is composed by linear parallel paths with white Gaussian system noise as maneuvering. This data set where sampled at 0.5 Hz which is a little higher that a normal maritime costal radar at 0.4 Hz (24 rpm).
+Scenario one through four was generated as a recording of time and position from an Autonomous Surface Vessel (ASV)-simulator with collision avoidance (COLAV), which is a project under work by D. Kwame Minde Kufolaor at NTNU. The ships are configured such that they need to maneuver to avoid collision with each other, which allows for tracking of maneuvering targets in close proximity to each other. These scenarios where sampled at 1 Hz which is a little faster than a normal high speed vessel radar at 0.8 Hz (48 rpm). The fifth scenario was generated as a part of this project, and is composed by linear parallel paths with white Gaussian system noise as maneuvering. This data set where sampled at 0.5 Hz which is a little higher that a normal maritime costal radar at 0.4 Hz (24 rpm) and at 1 Hz to compare the two most common radar update frequencies. Scenario 1 to 4 have a sensor field of view (FOV) of a Table \ref{tab:clutter_measurements} shows the expected number of clutter measurements in each of the two different fields of view. 
+
+\begin{table}
+\centering
+\begin{tabular}{c c c c c c c c}
+			&				&						& & &$\lambda_\phi \cdot FOV$& 	&		\\
+Scenario 	& Radar range	& FOV					& $1$ 	& $2$ 	& $4$ 	&$6$ 	& $8$	\\ \hline
+1-4		 	& $65 m$ 		& $1.3\cdot10^4 m^2$	& 1.3 	& 2.6 	& 5.2 	& 7.38 	& 9.21 	\\
+5-6		 	& $155 m$		& $7.5\cdot10^4 m^2$	& 3.22 	& 4.61 	& 5.99 	& 7.38 	& 9.21 					
+\end{tabular}
+\caption{Expected number of clutter measurements in scenarios}
+\label{tab:clutter_measurements}
+\end{table}
 
 \subsection{Simulations}
 Scenario one through four was simulated with the following variations with all four solvers.
 \begin{equation*}
 \begin{split}
 \V{P_D} &= \begin{bmatrix} 0.5 & 0.6 & 0.7 & 0.8 & 0.9 \end{bmatrix} \\
-\V{N} &=\begin{bmatrix} 1 & 3 & 6 \end{bmatrix} \\
-\V{\lambda_\phi} &=\begin{bmatrix} 0 & 1\cdot10^{-4} & 2\cdot10^{-4} & 4\cdot10^{-4} & 8\cdot10^{-4} \end{bmatrix}
+\V{N} &=\begin{bmatrix} 0 & 1 & 3 & 6 & 9 \end{bmatrix} \\
+\V{\lambda_\phi} &=\begin{bmatrix} 0 & 1\cdot10^{-4} & 2\cdot10^{-4} & 4\cdot10^{-4} & 6\cdot10^{-4} & 8\cdot10^{-4} \end{bmatrix}
 \end{split}
 \end{equation*}
-Each variant was simulated 100 times with different seeded random clutter measurements and miss detections. For each simulation, the estimated tracks where compared with the true tacks and categorised in successful and lost tracks, the track loss threshold $\epsilon_p$ was $4$ meters. Figure \ref{fig:dynamic_agents_full_cooperation_cropped} - \ref{fig:dynamic_and_static_agents_narrow_space_cropped} show the averaged track loss percentage.
-
-\subsubsection{Tracking performance}
+Each variant was simulated 160 times with different seeded random clutter measurements and miss detections. For each simulation, the estimated tracks where compared with the true tacks and categorised in successful and lost tracks, the track loss threshold $\epsilon_p$ was $4$ meters. Figure \ref{fig:dynamic_agents_full_cooperation_cropped} - \ref{fig:dynamic_and_static_agents_narrow_space_cropped} show the averaged track loss percentage for all simulations variants. Since the solvers only differ when it comes to run time and not track performance, the plots from the different solvers are identical and Figure \ref{fig:tracking_performance} shows the track performance in a more compact manner. 
 \begin{figure}[H]
     \centering
-    \textbf{Scenario 1}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
+  %  \textbf{Track loss}\par \medskip
+    \begin{subfigure}{0.49\textwidth} 
         \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm, width=\textwidth]{dynamic_agents_full_cooperation_cropped-CBC}
-        \caption{CBC solver}
+        \includegraphics[clip, trim=0cm 0cm 0cm 0cm, height=0.29\textheight]{dynamic_agents_full_cooperation_cropped-GLPK}
+        \caption{Scenario 1}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_agents_full_cooperation_cropped-CPLEX}
-        \caption{CPLEX solver}
+        \includegraphics[clip,  trim=0cm 0cm 0cm 0cm,height=0.29\textheight]{dynamic_agents_partial_cooporation_cropped-GLPK}
+        \caption{Scenario 2}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_agents_full_cooperation_cropped-GLPK}
-        \caption{GLPK solver}
+        \includegraphics[clip,  trim=0cm 0cm 0cm 0cm,height=0.29\textheight]{dynamic_and_static_agents_large_space_cropped-GLPK}
+        \caption{Scenario 3}
     \end{subfigure}
     \begin{subfigure}{0.49\textwidth}
         \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_agents_full_cooperation_cropped-GUROBI}
-        \caption{GUROBI solver}
+        \includegraphics[clip,  trim=0cm 0cm 0cm 0cm,height=0.29\textheight]{dynamic_and_static_agents_narrow_space_cropped-GLPK}
+        \caption{Scenario 4}
     \end{subfigure}
-	\caption{Simulation results for all solvers in scenario 1}
-    \label{fig:dynamic_agents_full_cooperation_cropped}
+     \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[clip,  trim=0cm 0cm 0cm 0cm,height=0.29\textheight]{{parallel_targets_0.5hz-GLPK}.pdf}
+        \caption{Scenario 5}
+    \end{subfigure}
+     \begin{subfigure}{0.49\textwidth}
+        \centering
+        \includegraphics[clip,  trim=0cm 0cm 0cm 0cm,height=0.29\textheight]{parallel_targets_1hz-GLPK}
+        \caption{Scenario 6}
+    \end{subfigure}
+	\caption{Simulation results for all scenarios}
+    \label{fig:tracking_performance}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \textbf{Scenario 2}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm, width=\textwidth]{dynamic_agents_partial_cooporation_cropped-CBC}
-        \caption{CBC solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_agents_partial_cooporation_cropped-CPLEX}
-        \caption{CPLEX solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_agents_partial_cooporation_cropped-GLPK}
-        \caption{GLPK solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm  0cm 2cm,width=\textwidth]{dynamic_agents_partial_cooporation_cropped-GUROBI}
-        \caption{GUROBI solver}
-    \end{subfigure}
-    \caption{Simulation results for all solvers in scenario 2}
-	\label{fig:dynamic_agents_partial_cooperation_cropped}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \textbf{Scenario3}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm, width=\textwidth]{dynamic_and_static_agents_large_space_cropped-CBC}
-        \caption{CBC solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_large_space_cropped-CPLEX}
-        \caption{CPLEX solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_large_space_cropped-GLPK}
-        \caption{GLPK solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_large_space_cropped-GUROBI}
-        \caption{GUROBI solver}
-    \end{subfigure}
-    \caption{Simulation results for all solvers in scenario 3}
-	\label{fig:dynamic_and_static_agents_large_space_cropped}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \textbf{Scenario 4}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm, width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped-CBC}
-        \caption{CBC solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped-CPLEX}
-        \caption{CPLEX solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped-GLPK}
-        \caption{GLPK solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{dynamic_and_static_agents_narrow_space_cropped-GUROBI}
-        \caption{GUROBI solver}
-    \end{subfigure}
-    \caption{Simulation results for all solvers in scenario 4}
-	\label{fig:dynamic_and_static_agents_narrow_space_cropped}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \textbf{Scenario 5}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip,  trim=0cm 0cm 0cm 2cm, width=\textwidth]{parallel_targets_1hz-CBC}
-        \caption{CBC solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{parallel_targets_1hz-CPLEX}
-        \caption{CPLEX solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{parallel_targets_1hz-GLPK}
-        \caption{GLPK solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{parallel_targets_1hz-GUROBI}
-        \caption{GUROBI solver}
-    \end{subfigure}
-    \caption{Simulation results for all solvers in scenario 5}
-    \label{fig:parallel_targets_1hz}
-\end{figure} 
-
-\begin{figure}[H]
-    \centering
-    \textbf{Scenario 6}\par \medskip
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip,trim=0cm 0cm 0cm 2cm, width=\textwidth]{{parallel_targets_0.5hz-CBC}.pdf}
-        \caption{CBC solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{{parallel_targets_0.5hz-CPLEX}.pdf}
-        \caption{CPLEX solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{{parallel_targets_0.5hz-GLPK}.pdf}
-        \caption{GLPK solver}
-    \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
-        \centering
-        \includegraphics[clip, trim=0cm 0cm 0cm 2cm,width=\textwidth]{{parallel_targets_0.5hz-GUROBI}.pdf}
-        \caption{GUROBI solver}
-    \end{subfigure}
-    \caption{Simulation results for all solvers in scenario 6}
-    \label{fig:parallel_targets_0.5hz}
-\end{figure} 
-
-From the simulations it can be observed that the different solvers perform practically identically when it comes to track performance. The number of lost tracks is proportional with the clutter level at a rate which is inverse proportional with the probability of detection $P_D$. An interesting observation is the return on investment regarding the number of scans to evaluate (N-scan). For instance, with $P_D=0.7$ the difference between $N=3$ and $N=6$ is marginal, at least when the clutter level is within reasonable levels. With $P_D=0.5$ we see that the pay-off is much higher for the extra computational cost with 15\% improvement between $N=3$ and $N=6$.
 \subsection{Runtime}
-Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays average the runtime for the entire scenario for the different solvers. From these it can be seen that the GLKP solver was the fastest one in general,
+Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays average the runtime for the entire scenario for the different solvers. 
 
 \begin{figure}[H]
 \centering
@@ -274,3 +159,11 @@ Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays ave
 \caption{Runtime for scenario 6}
 \label{fig:runtime_scenario_6}
 \end{figure}
+
+\subsection{Track loss performance}
+From the simulation results in Figure \ref{fig:dynamic_agents_full_cooperation_cropped} to \ref{fig:parallel_targets_1hz} it can be observed that the different solvers perform practically identically when it comes to track performance. From Figure \ref{fig:tracking_performance}, it can be seen that the number of lost tracks is proportional to the clutter level at an inverse proportional rate to the probability of detection $P_D$. An interesting observation is the return on investment regarding the number of scans to evaluate (N-scan). For instance, with $P_D=0.7$ the difference between $N=3$ and $N=6$ is marginal, at least when the clutter level is within reasonable levels ($\lambda_\phi < 4 \cdot 10^{-4}$). With $P_D=0.5$ we see that the pay-off is much higher for the extra computational cost with 15\% improvement between $N=3$ and $N=6$.
+
+\subsection{Time performance}
+From Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_6} it can be seen that the solvers are all in the same area, though with a very consistent difference in scenario 1 to 4. In these scenarios the GLKP solver is the fastest with between 5-10 seconds compared with CPLEX which is the slowest in these scenarios. This trend is most likely caused by the different amount of overhead in the solvers, where IBM's CPLEX which is marked leading in many ways might have way more initialization and setup procedures compared GNU's GLPK. In scenario 5 and 6, a different and more varying trend is visible. Here we see that both GUROBI and GLPK are fastest in different situations, and generally all other solvers than CPLEX perform quite similar.
+
+The run time increases very linear with the amount of clutter, which is expected as most of the operations run in the algorithm are based on tree operations with $O(E+V)$ run time. The structure in a track-tree implies that each vertex has one edge, hence any depth-first-search based operations will have run time  $O(2V)=O(V)$. The run time increases near exponentially with the size of N, which is very naturally since the number of hypotheses that must be considered is exponentially larger.

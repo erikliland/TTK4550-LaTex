@@ -1,20 +1,13 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Closing remarks}
 \subsection{Conclusion}
-This report has shown that off-the-shelf integer linear program (ILP) solvers, both free and commercial, are capable solving the data association problem in a track oriented multiple hypothesis tracker. It has also shown that the tracking performance does benefit very little from more than $N=3$ scan history when the probability of detection $P_D > 70\%$, even with severe amounts of clutter.
+This report has shown that off-the-shelf ILP solvers, both free and commercial, are capable solving the data association problem in a track oriented multiple hypothesis tracker. It has also shown that the tracking performance does benefit very little from more than $N=3$ scan history when the probability of detection $P_D > 70\%$, even with severe amounts of clutter.
 
 \subsection{Future work}
-Pruning / merge similar state
+One area where there might be substantial benefits is in more complex pruning and merging of hypotheses. By nature, many hypotheses will have very similar paths and could therefore be candidates for being merged to one. The danger with this is that the assignment problem could render infeasible and crash the algorithm. A novel approach could be to formulate the pruning as an optimization problem. With this approach it is possible to also remove hypotheses with a low score, subject to the problem still being feasible. 
 
-Prune unlikely hypothesis as long as the problem is still solvable
+I the maritime context, it could also be very beneficial to use the maritime AIS (Automatic Identification System) to aid the tracking. There are different approaches to include this extra set of data, with their pros and cons. One option could be to use the AIS track to weight the measurements from the radar, this way the measurement that are more likely to originate from a target is given a higher score. Another possibility is to do track-to-track fusion / filtering, where the best or N-best tracks from the radar are filtered with the tracks from the AIS system. A similar problem is tackled by Coraluppi in \cite{Coraluppi2000}.
 
-Parallelization / scaling
+Another improvement that would benefit the run time requirement is to parallelize  the algorithm. Since many of the operations in the algorithm are independent, they are excellent candidates for running in parallel. Today CPU's can be delivered with as many as 24 cores per die, and with hyper threading they can process op to 48 threads. With server grade motherboards capable of one to four CPU's, there is potential to run almost 200 threads if necessary. This would however be a pure brute force approach, which would push the boundary of how many targets the system would be able to track simultaneously, but not the run time as a function of the problem size.
 
-Use AIS to aid tracking
-
-\subsubsection{Track initialization}
-- Recursive ransac
-
-- PDA
-
-- Another MHT
+A final but very important piece is also necessary for the system to  be complete, track initialization. As with AIS assisted tracking, there are plenty of ways to tackle this challenge. One alternative, and probably the most common for TOMHT is to run a separate system besides the tracking loop to initiate targets. This system can run i.e. recursive RANSAC, PDA-/JPDA-filter, with a selected criterion for birth. The most common is a N out of M threshold, where N and M is about 4 and 6. These separate initialization trackers can run on all measurements, or maybe preferably on the non-active measurements from the primary system. 

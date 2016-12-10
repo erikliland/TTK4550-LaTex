@@ -2,12 +2,11 @@
 
 \begin{abstract}
 \addcontentsline{toc}{subsection}{Abstract}
-AUTOSEA is a collaborative research and development project between NTNU (Norwegian University of Science and Technology) AMOS (Centre for autonomous marine operations and systems) and the Norwegian maritime industry. The aim of the project is to attain world leading knowledge in design and verification of control systems for autonomous surface vessels (ASVs).
+Autonomous Surface Vessels (ASVs) are, at least in control and navigational perspective, unmanned vessels which can for instance be used to transport cargo and people as well as for surveillance and other tasks. To ensure a safe journey, the route planer needs a real time image of its surroundings in addition to map data to avoid collision and dangerous situations with other vessels. In the maritime environment, this is primarily done by radars mounted on the ship itself, were the challenge is to know which measurement (reflection) belongs together from scan to scan to get a track on each target.
 
-ASVs are, at least in control and navigational perspective, unmanned vessels which can for instance be used to transport cargo and people as well as for surveillance and other tasks. To ensure a safe journey, the route planer needs a real time image of its surroundings in addition to map data to avoid collision and dangerous situations with other vessels. In the maritime environment, this is primarily done by radars mounted on the ship itself. The challenge is to know which measurement (reflection) belongs together from scan to scan to get a track on each target.
+Multiple hypothesis tracking (MHT) has become the preferred method for solving the data association problem in a multi target environment. In a maritime tracking situation for anti collision, MHT demonstrates it reliability for use in safety critical systems since it avoids track coalescence and compensate for missed detections by utilizing multiple scans. This report shows that a Track Oriented MHT (TO-MHT) successfully track targets with detection probability above $70\%$ with less than $5\%$ average track loss in multi target scenarios with clutter.
 
-Multiple hypothesis tracking (MHT) is generally the preferred method for solving the data association problem in a multi target scenario where the target dynamics are unpredictable. This report documents a survey of multi target tracking methods, and compare their strengths and weaknesses from a maritime safety perspective.
+It also discusses the computational cost of MHT and shows the feasibility for MHT implemented on modest personal computer and potential for paralleling on high end real time systems.
 
-A target oriented MHT tracking algorithm is implemented in Python, with off-the-shelf integer linear program (ILP) solvers to solve the optimization problem that arise when multiple targets associates the same measurement with is track.
 \end{abstract}
 \newpage

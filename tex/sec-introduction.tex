@@ -1,21 +1,27 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Introduction}
 \subsection{Motivation}
-This report is the result of TTK4550 Engineering cybernetics specialization report. Where the aim is to \emph{let the student specialize in a selected area based on scientific methods, collect supplementary information based on literature search and other sources and combine this with own knowledge into a project report}. The learning outcome of this project is to give the student an extensive knowledge in a current problem, good knowledge in related topics and relevant scientific literature.
+This report is the result of TTK4550 Engineering cybernetics specialization report. Where the aim is to \emph{let the student specialize in a selected area based on scientific methods, collect supplementary information based on literature search and other sources and combine this with own knowledge into a project report}\footnote{http://www.ntnu.edu/studies/courses/TTK4550}. The learning outcome of this project is to give the student an extensive knowledge in a current problem, good knowledge in related topics and relevant scientific literature.
 
-\subsection{Autosea}
-This project is a part of the Sensor fusion and collision avoidance for autonomous surface vessels (Autosea) project, which is a collaboration between NTNU AMOS and Maritime Robotics, DNV GL and Kongsberg Maritime. The vision for the project is to \emph{attain world-leading competence and knowledge in the design and verification of methods and system for sensor fusion and collision avoidance for autonomous surface vessels}.
+
+%\subsection{Autosea}
+%AUTOSEA (Sensor fusion and collision avoidance for autonomous surface vessels) is a collaborative research and development project between NTNU AMOS and the Norwegian maritime industry. The industry partners are Maritime Robotics, DNV GL and Kongsberg Maritime. The vision for the project is to \emph{attain world-leading competence and knowledge in the design and verification of methods and system for sensor fusion and collision avoidance for autonomous surface vessels}.
+
+%AUTOSEA proposed several master thesis projects, all whom also included the option for specialization project. The projects were divided into three categories: Collision avoidance, Sensor fusion and Miscellaneous.
+
 
 \subsection{Problem description}
-The proposed title for this project (and the following master-thesis) was "Multi-target tracking using radar and AIS". The key idea behind this formulation is that radar and AIS have different strengths and weaknesses, and if utilized properly, the strengths of both system can be exploited, while the weaknesses can be reduced. The following task was proposed for this project:
+The proposed title for this project, and the following master-thesis, was "Multi-target tracking using radar and AIS". The key idea behind this formulation is that radar and AIS have different strengths and weaknesses, and if utilized properly, the strengths of both system can be exploited, while the weaknesses can be reduced. For this project it was decided to focus fully on the gold standard within multi target tracking, MHT. To ensure the tracking system would be sufficiently understood, correctly implemented and thoroughly tested, the AIS integration was postponed to the master thesis.
+
+The following task was proposed for this project:
 \begin{itemize}
 \item Write a survey on multi-target and multi-sensor tracking methods.
-\item Implement a multi-target tracking method that fuses radar data with AIS data under benign assumptions.
+\item Implement a multi-target tracking method.
 \item Describe the method and summarize the findings in a report.
 \end{itemize}
 
 \subsection{Goals}
-The goals for this project is to implement a radar tracking algorithm in Python based on one of the surveyed methods, test this with simulated and real data and analyze the performance for different conditions and discuss methods for improvement.
+The goals for this project is to implement a Track Oriented Multi Hypothesis Tracking algorithm in Python, test this with simulated data and analyze the performance for different conditions and discuss methods for improvement.
 
 \subsection{Outline of report}
-In section \ref{sec:survey}, different methods for target tracking and data association are presented in varying depth, more on the most relevant methods and an overview on the others. In section \ref{sec:algorithm}, the algorithm based on the selected approach is thoroughly explained, and in section \ref{sec:ilp} the integer optimization problem that arises in section \ref{sec:algorithm} is elaborated. The results are presented in section \ref{sec:results} and discussed in section \ref{sec:discussion}.
+In section \ref{sec:survey}, different methods for target tracking and data association are presented. Here the focus is to highlight the key difference between the most common methods, with focus on the properties these lead to. In section \ref{sec:algorithm}, a Track Oriented Multi Hypothesis Tracker (TO-MHT) is thoroughly explained, and in section \ref{sec:ilp} the integer optimization problem that arises in section \ref{sec:algorithm} is elaborated. The results are presented in section \ref{sec:results} and discussed in section \ref{sec:discussion}.
