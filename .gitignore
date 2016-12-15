@@ -11,7 +11,9 @@
 *.cb
 *.cb2
 *.nls
+*.ngl
 .nls
+.ngl
 
 ##Sublime files
 *.sublime*
