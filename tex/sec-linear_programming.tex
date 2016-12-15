@@ -1,63 +1,37 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Linear programming}
 \label{sec:ilp}
-The aim of this section is to elaborate the use of linear programming to solve the data association problem in MHT that arises when there are multiple (possible mutual exclusive) possibilities of measurement arrangements within the existing set of tracks. As with any optimization problem, we need an objective function which tells us how good or bad a given assignment is, and a set of constraints that limits the solution to the physical limits and our assumptions.
+The aim of this section is to elaborate the use of linear programming to solve the data association problem in MHT that arises when there are multiple (possible mutual exclusive) possibilities of measurement arrangements within the existing set of tracks. As with any optimization problem, we need an objective function which tells us how good or bad a given assignment is, and a set of constraints that limits the solution to physical limits and our assumptions.
 
 \subsection{Problem formulation}
-Storms and Spieksma \cite{Storms2003} are suggesting an Integer Linear Programming (ILP) scheme with Linear Programming (LP) relaxation and Greedy Rounding Procedure (GRP) as solvers. 
+Multiple optimization formulations of the association problem for multi target tracking have been proposed through the history. The first was \cite{Morefield1977} where a 0-1 ILP was proposed, followed by \cite{Storms2003} where an ILP scheme with LP relaxation and Greedy Rounding Procedure (GRP) as solvers were proposed and \cite{Coraluppi2004} were a framework for both association and removal of competing tracks.
+
+All three mentioned publications have essentially equal objective functions, though some use minimize and other use maximize in their formulation. The essence of them all is (\ref{eq:general_objective_funtion}), where $\V{c}$ is a vector of costs (minimize) or scores (maximize) and $\V{x}$ (or $\V{\tau}$ as it is also commonly called) is a selection vector, where each row in $\V{c}$ and $\V{x}$ represents one branch in the track hypothesis tree.
 \begin{equation}
 \begin{aligned}
-& \underset{f}{\text{minimize}}
-& & f=\sum_{z \in \V{Z^*}} c_z x_z \\
-& \text{subject to}
-& & \sum_{z \in \V{Z^*} , z(k)=z_{i_k}^k} x_z=1 , \forall k = 1, \ldots, N   \text{ and } i_k = 1, \ldots, M_k  \\
-&&& x_z \in \{0,1\}
+& \underset{x}{\text{min}}
+& & \V{c}^T \V{x}
 \end{aligned}
+\label{eq:general_objective_funtion}
 \end{equation}
-where, $c_z = -lnQ_z$ and the likelihood for a track is
-\begin{equation}
-Q(z) = \prod_{k=1}^N (P_\phi^k)^{\Delta_{i_k}} \left \{ 
-	\left[ \frac{P_d f_\delta^k (z_{i_k}^k | z)}{\lambda_\varphi f_\varphi^k(z_{i_k}^k)} \right]^{\delta_{i_k}^k} 	
-	\left[ \frac{\lambda_\nu f_\nu^k(z_{i_k}^k|z)}{\lambda_\varphi f_\varphi^k(z_{i_k}^k)} \right]^{\nu_{i_k}^k}
-	\right \}^{(1-\Delta_{i_k})}
-\end{equation}
-where,
-\begin{equation*}
-\begin{split}
-	\Delta_{i_k} 	&= 
-		\begin{cases} 
-			1, i_k=0 (\text{dummy-report}) \\ 
-			0, \text{otherwise} 
-		\end{cases} \\
-	P_\phi^k 		&=
-		\begin{cases} 
-			1-P_d, z_{i_k}^k \text{is a missing report} \\ 
-			0, \text{otherwise} 
-		\end{cases} \\
-	\nu_{i_k}^k 	&=
-		\begin{cases} 
-			1, z_{i_k}^k \text{initiates a track} \\ 
-			0, \text{otherwise} 
-		\end{cases} \\
-	\delta_{i_k}^k 	&=
-		\begin{cases} 
-			1, z_{i_k}^k \text{proceeds as a track} \\ 
-			0, \text{otherwise} 
-		\end{cases} \\
-	P_d 			&= \text{probability of detection} \\
-	\lambda_\varphi &= \text{expected number of false alarms (Poisson distribution)} \\
-	\lambda_\nu		&= \text{expected number of new targets (Poisson distribution)} \\
-	f_\nu^k 		&= f_\varphi^k = \frac{1}{\pi r^2}, \text{where r is the sensor range} \\
-	f_\delta^k 		&= \frac{e^{-\frac{1}{2}[z_{i_k}^k-h(\bar{s}(t_k))]^T B^{-1} [z_{i_k}-h(\bar{s}(t_k))] }}{\sqrt{(2\pi)^n |B|}} \\
-	n 				&= \text{dimension of measurement vector} \\
-	h(\cdot)		&= \text{transformation of Cartesian to polar} \\
-	\bar{s}			&= \text{predicted state vector} \\
-	B 				&= \text{covariance of } z_{i_k}^k - h(\bar{s}(t_k))
-\end{split}
-\end{equation*}
-This approach uses a rather inelegant summation notation which is not on a standard (I)LP format. 
 
-In this work we propose a more compact formulation of the data association problem on ILP standard form.
+Further, the constraints that shall ensure that each measurement is not assigned to more  than one track are generally formulated as (\ref{eq:general_constraints_equality}) or (\ref{eq:general_constraints_inequality}) , where $\M{A}$ is a binary matrix whose rows are branches in a track hypothesis tree and $\V{b}$ is a vector with ones.
+\begin{equation}
+\begin{aligned}
+&	\M{A} \V{x} = \V{b} 	\\
+&	\V{x} \in \{0,1\}
+\end{aligned}
+\label{eq:general_constraints_equality}
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+&	\M{A} \V{x} \leq \V{b} 	\\
+&	\V{x} \in \{0,1\}
+\end{aligned}
+\label{eq:general_constraints_inequality}
+\end{equation}
+The difference between (\ref{eq:general_constraints_equality} and (\ref{eq:general_constraints_inequality}) originates from the   
 \begin{equation}
 \begin{aligned}
 &	\underset{}{\text{maximize}}
