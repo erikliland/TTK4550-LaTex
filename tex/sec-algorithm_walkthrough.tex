@@ -19,7 +19,7 @@ x & y & \dot{x} & \dot{y}
 \end{bmatrix}^T
 \label{eq:state_vector}
 \end{equation}
-where the change of velocity (acceleration) is assumed zero. The latest assumption is compensated with an increased system noise covariance in the model. For a linear system with white and uncorrelated system and measurement noise, the Kalman Filter is an optimal estimator with (\ref{eq:kalman_model}) as time evolution model,
+where the change of velocity (acceleration) is assumed to be white Gaussian noise. For a linear system with white and uncorrelated system and measurement noise, the Kalman Filter is an optimal estimator with (\ref{eq:kalman_model}) as time evolution model,
 \begin{equation}
 \begin{split}
 \V{x}(k+1) &= \M{\Phi} \V{x}(k) + \M{\Gamma} \V{w} \\
@@ -33,11 +33,11 @@ where
 \M{\Phi} 	&= \text{the state transition matrix} \\
 \M{\Gamma}	&= \text{the disturbance matrix} \\
 \V{w}		&= \text{the process noise} \\
-\M{H} 		&= \text{the measurement matrix} \\
+\M{H} 		&= \text{the state observation matrix} \\
 \V{v} 		&= \text{the observation noise} \\
 \end{split}
 \end{equation}.
-The procedure of predicting the target state at the next time step is according to the "time update" equations of the Kalman Filter (\ref{eq:kalman_timeUpdate}),
+The procedure of predicting the target state at the next time step is according to the time update equations of the Kalman Filter (\ref{eq:kalman_timeUpdate}),
 \begin{equation}
 \begin{split}
 \V{\bar{x}}(k+1) 	&= \M{\Phi} \V{\hat{x}}(k) \\
@@ -94,7 +94,7 @@ To avoid calculating the likelihood for all possible combinations of targets and
 \end{gathered}
 \end{equation}
 
-This is a very common approach, and is used by most tracking systems at some stage in the processing of new measurements. In (\ref{eq:gate}), $\eta$ is the inverse \gls{cdf} of the chi-square distribution for a given confidence with degrees of freedom equal to the sensor system. For each measurement inside the region, a filtered state and covariance is calculated using the "measurement update" equations in the Kalman Filter (\ref{eq:kalman_measurementUpdate}), followed by the creation of a new track hypothesis.
+This is a very common approach, and is used by most tracking systems at some stage in the processing of new measurements. In (\ref{eq:gate}), $\eta$ is the inverse \gls{cdf} of the chi-square distribution for a given confidence with degrees of freedom equal to the sensor system. For each measurement inside the region, a filtered state and covariance is calculated using the measurement update equations in the Kalman Filter (\ref{eq:kalman_measurementUpdate}), followed by the creation of a new track hypothesis.
 \begin{equation}
 \begin{split}
 \V{\tilde{y}}	&= \V{z} - \M{H} \V{\bar{x}} \\
@@ -136,7 +136,7 @@ Since the global problem of finding the optimal selection of hypotheses is growi
 By constructing a 0-1 adjacency matrix describing the connection between all the nodes in the track forest, the clustering problem is equivalent to the \emph{connected components} problem in graph theory \cite{Chen2015}.
 
 \subsection{Association}
-When the targets are divided into independent clusters, each of them can be treated as a global problem where we want to minimize the cost or maximize the score of the selected track hypotheses (leaf nodes), while fulfilling the constraints that each measurement can only be a part of one track and that minimum and maximum one hypothesis can be selected from each target. Since only binary values, selected of not selected, is desired for selection of hypotheses, the problem becomes an \gls{ilp}. A solution to this problem is explained in section \ref{sec:ilp}.
+When the targets are divided into independent clusters, each of them can be treated as a global problem where we want to minimize the cost or maximize the score of the selected track hypotheses (leaf nodes), while fulfilling the constraints that each measurement can only be a part of one track and that minimum and maximum one hypothesis can be selected from each target. Since only binary values, selected or not selected, is desired for selection of hypotheses, the problem becomes an \gls{ilp}. A solution to this problem is explained in section \ref{sec:ilp}.
 
 \subsection{N-scan pruning}
 To keep the computational cost within reasonable limits, it is necessary to limit the amount of time steps backwards in time that the algorithm computes. This is done by removing all branches but the active track hypothesis at the current root node, and assign the (one) remaining node as new root node. This procedure is graphically explained in Figure \ref{fig:pruned-hyp-tree}, where a solid square frame indicates the current root node, and a dotted square frame indicates the new root node. The bold arrows in the figure represents the active track.

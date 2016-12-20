@@ -1,0 +1,33 @@
+%!TEX root = ../TTK4550-MHT.tex
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c c}
+\bfseries Processes & \bfseries Total & \bfseries Grow & \bfseries Cluster & \bfseries Optimize & \bfseries Prune \\ \hline
+\csvreader[head to column names]{{data/parallelTimeLog_AWS.csv}}{}
+{\Processes & \Total & \Grow & \Cluster & \Optimize & \Prune \\\hline}
+\end{tabular}
+\caption{Runtime of a scan with different amount of processes (time in ms)}	
+\label{tab:runtime_parallel_aws}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c}
+\bfseries Processes & \bfseries Grow & \bfseries Cluster & \bfseries Optimize & \bfseries Prune \\ \hline
+\csvreader[head to column names,respect percent=true]{{data/parallelTimeLogPercentage_AWS.csv}}{}
+{\Processes & \Grow \% & \Cluster \% & \Optimize \% & \Prune \% \\\hline }
+\end{tabular}
+\caption{Runtime distribution percentage}	
+\label{tab:runtime_parallel_percentage_aws}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c}
+\bfseries Processes & \bfseries Search & \bfseries Predict & \bfseries Create & \bfseries Add \\ \hline
+\csvreader[head to column names,respect percent=true]{{data/parallelTimeLogDistribution_AWS.csv}}{}
+{\Processes & \Search \% & \Predict \% & \Create \% & \Add \% \\\hline }
+\end{tabular}
+\caption{Worker runtime distribution percentage}	
+\label{tab:worker_parallel_percentage_aws}
+\end{table}

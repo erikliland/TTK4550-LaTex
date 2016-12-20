@@ -1,9 +1,11 @@
 \documentclass[a4paper, 12pt]{article}
 \input{tex/preamble.tex}
-
-
 \input{tex/glossary.tex}
 \input{tex/nomenclature.tex}
+
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
 
 \begin{document}
 	\pagenumbering{roman}
@@ -29,15 +31,15 @@
 	\printnomenclature \newpage 
 
 	\pagenumbering{arabic}	
-	\input{tex/sec-introduction.tex} \newpage 
-	\input{tex/sec-survey_of_methods.tex} \newpage 
-	\input{tex/sec-algorithm_walkthrough.tex} \newpage 
-	\input{tex/sec-linear_programming.tex} \newpage 
-	\input{tex/sec-implementation.tex} \newpage 
-	\input{tex/sec-results.tex} \newpage 
-	\input{tex/sec-discussion.tex} \newpage  
-	\input{tex/sec-closing_remarks.tex} \newpage
-	\input{tex/appendices.tex} \newpage
+	\input{tex/sec-introduction.tex} \clearpage 
+	\input{tex/sec-survey_of_methods.tex} \clearpage 
+	\input{tex/sec-algorithm_walkthrough.tex} \clearpage 
+	\input{tex/sec-linear_programming.tex} \clearpage 
+	\input{tex/sec-implementation.tex} \clearpage 
+	\input{tex/sec-results.tex} \clearpage
+	\input{tex/sec-discussion.tex} \clearpage  
+	\input{tex/sec-closing_remarks.tex} \clearpage
+	\input{tex/appendices.tex} \clearpage
 	\addcontentsline{toc}{section}{References}
 	\bibliographystyle{ieeetr}
 	\bibliography{MHTbib}
