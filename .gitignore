@@ -12,8 +12,6 @@
 *.cb2
 *.nls
 *.nlg
-.nls
-.nlg
 
 ##Sublime files
 *.sublime*
