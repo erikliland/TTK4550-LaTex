@@ -3,50 +3,50 @@
 \label{sec:results}
 
 \subsection{Testing scheme}
-The evaluation of the MHT algorithm is two-sided, firstly the algorithm must be able to track under challenging conditions, secondly it must be able to do this without having an ever growing computationally cost and run time. The first performance metric is how well the algorithm is estimating the true position to the object it is tracking. This is measured as the Euclidean distance between the estimated and true track:
+The evaluation of the \gls{mht} algorithm is two-sided, firstly the algorithm must be able to track under challenging conditions, secondly it must be able to do this without having an ever growing computationally cost and run time. The first performance metric is how well the algorithm is estimating the true position to the object it is tracking. We measure this by means of the Euclidean distance between the estimated and true track (\ref{eq:euclidian_distance_vector}).
 \begin{equation}
 	\Delta P = \| \V{p}_{track}-\V{p}_{target} \|_2
+\label{eq:euclidian_distance_vector}
 \end{equation}
-where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t after initial convergence. If a track is deviating more that the threshold and is never within the threshold again, it is considered lost at the time-step it exceeded the threshold. If the track should converge after exceeding the threshold, it is considered restored at the time-step it is returning within the limit. The algorithm is tested on six scenarios:
+The track is considered correct if $\Delta P \leq \varepsilon_p$ for all t after initial convergence. If a track is deviating more that the threshold and is never within the threshold again, it is considered lost at the time-step when it exceeded the threshold. If the track should converge after exceeding the threshold, it is considered restored at the time-step it is returning within the limit. The algorithm is tested on six scenarios:
 \begin{itemize}
 	\item Five fully cooperating ships
     \item Five partially cooperative ships
     \item Five ships avoiding obstacles with large space
     \item Five ships avoiding obstacles with little space
-	\item Five almost parallel ships (normal speed radar)
-	\item Five almost parallel ships (high speed radar)
+	\item Five almost parallel ships (normal speed \gls{radar})
+	\item Five almost parallel ships (high speed \gls{radar})
 \end{itemize}
-
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[height=0.3\textheight]{scenario1}
+        \includegraphics[height=0.26\textheight]{scenario1}
         \caption{First scenario}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[height=0.3\textheight]{scenario2}
+        \includegraphics[height=0.26\textheight]{scenario2}
         \caption{Second scenario}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[height=0.3\textheight]{scenario3}
+        \includegraphics[height=0.26\textheight]{scenario3}
         \caption{Third scenario}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[height=0.3\textheight]{scenario4}
+        \includegraphics[height=0.26\textheight]{scenario4}
         \caption{Fourth scenario}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[height=0.29\textheight]{scenario5}
+        \includegraphics[height=0.26\textheight]{scenario5}
         \caption{Fifth scenario}
     \end{subfigure}
-    \begin{subfigure}{0.49\textwidth}
+    \begin{subfigure}{0.4\textwidth}
         \centering
-        \includegraphics[height=0.29\textheight]{scenario6}
+        \includegraphics[height=0.26\textheight]{scenario6}
         \caption{Sixth scenario}
     \end{subfigure}
     \caption{True track for scenario 1-6}
@@ -54,13 +54,13 @@ where the track is considered correct if $\Delta P \leq	\varepsilon_p$ for all t
 \end{figure} 
 
 \subsection{Simulation data}
-Scenario one through four was generated as a recording of time and position from an Autonomous Surface Vessel (ASV)-simulator with collision avoidance (COLAV), which is a project under work by D. Kwame Minde Kufolaor at NTNU. The ships are configured such that they need to maneuver to avoid collision with each other, which allows for tracking of maneuvering targets in close proximity to each other. These scenarios where sampled at 1 Hz which is a little faster than a normal high speed vessel radar at 0.8 Hz (48 rpm). The fifth scenario was generated as a part of this project, and is composed by linear parallel paths with white Gaussian system noise as maneuvering. This data set where sampled at 0.5 Hz which is a little higher that a normal maritime costal radar at 0.4 Hz (24 rpm) and at 1 Hz to compare the two most common radar update frequencies. Scenario 1 to 4 have a sensor field of view (FOV) of a Table \ref{tab:clutter_measurements} shows the expected number of clutter measurements in each of the two different fields of view. 
+Scenario one through four was generated as a recording of time and position from an \gls{asv} simulator with \gls{colav}, developed by Dr. D. Kwame Minde  \textbf{Kufolaor} at \gls{ntnu}. The ships are configured such that they need to maneuver to avoid collision with each other, which allows for tracking of maneuvering targets in close proximity to each other. These scenarios where sampled at 1 Hz which is a little faster than a normal high speed vessel \gls{radar} at 0.8 Hz (48 \gls{rpm}). The fifth scenario was generated as a part of this project, and is composed by linear parallel paths with white Gaussian system noise as maneuvering. This data set where sampled at 0.5 Hz which is a little higher that a normal maritime coastal \gls{radar} at 0.4 Hz (24 \gls{rpm}) and at 1 Hz to compare the two most common \gls{radar} update frequencies. Scenario 1 to 4 have a sensor \gls{fov} of a Table \ref{tab:clutter_measurements} shows the expected number of clutter measurements in each of the two different fields of view. 
 
 \begin{table}
 \centering
 \begin{tabular}{c c c c c c c c}
 			&				&						& & &$\lambda_\phi \cdot FOV$& 	&		\\
-Scenario 	& Radar range	& FOV					& $1$ 	& $2$ 	& $4$ 	&$6$ 	& $8$	\\ \hline
+Scenario 	& Radar range	& \gls{fov}				& $1$ 	& $2$ 	& $4$ 	&$6$ 	& $8$	\\ \hline
 1-4		 	& $65 m$ 		& $1.3\cdot10^4 m^2$	& 1.3 	& 2.6 	& 5.2 	& 7.38 	& 9.21 	\\
 5-6		 	& $155 m$		& $7.5\cdot10^4 m^2$	& 3.22 	& 4.61 	& 5.99 	& 7.38 	& 9.21 					
 \end{tabular}
@@ -69,7 +69,7 @@ Scenario 	& Radar range	& FOV					& $1$ 	& $2$ 	& $4$ 	&$6$ 	& $8$	\\ \hline
 \end{table}
 
 \subsection{Simulations}
-Scenario one through four was simulated with the following variations with all four solvers.
+Scenario one through six was simulated with the following variations with all four solvers.
 \begin{equation*}
 \begin{split}
 \V{P_D} &= \begin{bmatrix} 0.5 & 0.6 & 0.7 & 0.8 & 0.9 \end{bmatrix} \\
@@ -77,7 +77,14 @@ Scenario one through four was simulated with the following variations with all f
 \V{\lambda_\phi} &=\begin{bmatrix} 0 & 1\cdot10^{-4} & 2\cdot10^{-4} & 4\cdot10^{-4} & 6\cdot10^{-4} & 8\cdot10^{-4} \end{bmatrix}
 \end{split}
 \end{equation*}
-Each variant was simulated 160 times with different seeded random clutter measurements and miss detections. For each simulation, the estimated tracks where compared with the true tacks and categorised in successful and lost tracks, the track loss threshold $\epsilon_p$ was $4$ meters. Figure \ref{fig:dynamic_agents_full_cooperation_cropped} - \ref{fig:dynamic_and_static_agents_narrow_space_cropped} show the averaged track loss percentage for all simulations variants. Since the solvers only differ when it comes to run time and not track performance, the plots from the different solvers are identical and Figure \ref{fig:tracking_performance} shows the track performance in a more compact manner. 
+Each variant was simulated 160 times with different seeded random clutter measurements and misdetections. For each simulation, the estimated tracks where compared with the true tacks and categorised in successful and lost tracks, the track loss threshold $\epsilon_p$ was $4$ meters. Figure \ref{fig:track_hypotheses_example} display a mid-simulation plot with current best tracks in solid lines, and hypotheses in dotted lines. 
+\begin{figure}[H]
+    \centering
+    \includegraphics[clip, trim=3cm 2.5cm 3cm 3cm,width=0.7\textwidth]{tracks_with_hypotheses}
+    \caption{Track hypotheses example}
+    \label{fig:track_hypotheses_example}
+\end{figure}
+Figure \ref{fig:dynamic_agents_full_cooperation_cropped} - \ref{fig:dynamic_and_static_agents_narrow_space_cropped} show the averaged track loss percentage for all simulations variants. Figure \ref{fig:tracking_performance} shows the track performance from the "GLPK" solver.
 \begin{figure}[H]
     \centering
   %  \textbf{Track loss}\par \medskip
@@ -116,7 +123,7 @@ Each variant was simulated 160 times with different seeded random clutter measur
 \end{figure}
 
 \subsection{Runtime}
-Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays average the runtime for the entire scenario for the different solvers. 
+Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays average the runtime for the entire scenario for the different solvers. The runtime along the z-axis displays the time used for simulating the entire scenario.
 
 \begin{figure}[H]
 \centering
@@ -163,7 +170,9 @@ Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_5} displays ave
 \subsection{Track loss performance}
 From the simulation results in Figure \ref{fig:dynamic_agents_full_cooperation_cropped} to \ref{fig:parallel_targets_1hz} it can be observed that the different solvers perform practically identically when it comes to track performance. From Figure \ref{fig:tracking_performance}, it can be seen that the number of lost tracks is proportional to the clutter level at an inverse proportional rate to the probability of detection $P_D$. An interesting observation is the return on investment regarding the number of scans to evaluate (N-scan). For instance, with $P_D=0.7$ the difference between $N=3$ and $N=6$ is marginal, at least when the clutter level is within reasonable levels ($\lambda_\phi < 4 \cdot 10^{-4}$). With $P_D=0.5$ we see that the pay-off is much higher for the extra computational cost with 15\% improvement between $N=3$ and $N=6$.
 
-\subsection{Time performance}
-From Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_6} it can be seen that the solvers are all in the same area, though with a very consistent difference in scenario 1 to 4. In these scenarios the GLKP solver is the fastest with between 5-10 seconds compared with CPLEX which is the slowest in these scenarios. This trend is most likely caused by the different amount of overhead in the solvers, where IBM's CPLEX which is marked leading in many ways might have way more initialization and setup procedures compared GNU's GLPK. In scenario 5 and 6, a different and more varying trend is visible. Here we see that both GUROBI and GLPK are fastest in different situations, and generally all other solvers than CPLEX perform quite similar.
+Scenario 1-4 was simulated within a very small area where the targets had good separation both at the start and end of the simulation. This gives the algorithm more \glspl{scan} to figure out the correct association after any multi-target conflicts that could arise when close to other target, and hence better track loss figures. In scenario 5-6 the targets start off spatially much closer and are moving faster. This leads to a situation more vulnerable to misdetections where a high $N$-scan is beneficial. 
 
-The run time increases very linear with the amount of clutter, which is expected as most of the operations run in the algorithm are based on tree operations with $O(E+V)$ run time. The structure in a track-tree implies that each vertex has one edge, hence any depth-first-search based operations will have run time  $O(2V)=O(V)$. The run time increases near exponentially with the size of N, which is very naturally since the number of hypotheses that must be considered is exponentially larger.
+\subsection{Time performance}
+From Figure \ref{fig:runtime_scenario_1} to \ref{fig:runtime_scenario_6} it can be seen that the solvers are all in the same area, though with a very consistent difference in scenario 1 to 4. In these scenarios the \gls{glpk} solver is the fastest with between 5-10 seconds compared with \gls{cplex} which is the slowest in these scenarios. This trend is most likely caused by the different amount of overhead in the solvers, where IBM's \gls{cplex} which is marked leading in many ways might have way more initialization and setup procedures compared GNU's \gls{glpk}. In scenario 5 and 6, a different and more varying trend is visible. Here we see that both \gls{gurobi} and \gls{glpk} are fastest in different situations, and generally all other solvers than \gls{cplex} perform quite similar.
+
+The run time increases linearly with the amount of clutter, which is expected as most of the operations run in the algorithm are based on tree operations with $O(E+V)$ run time. The structure in a track-tree implies that each vertex has one edge, hence any \gls{dfs} based operations will have run time  $O(2V)=O(V)$. The run time increases near exponentially with the size of N, which is natural since the number of hypotheses that must be considered is exponentially larger.

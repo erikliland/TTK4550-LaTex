@@ -1,31 +1,45 @@
 \documentclass[a4paper, 12pt]{article}
 \input{tex/preamble.tex}
+
+
+\input{tex/glossary.tex}
+\input{tex/nomenclature.tex}
+
 \begin{document}
 	\pagenumbering{roman}
 	\input{tex/titlepage.tex}
 
 	\addtocounter{page}{1}
 	\input{tex/sec-abstract.tex}
+	\glsresetall	
 	
 	\addcontentsline{toc}{subsection}{Table of Contents} 
 	\tableofcontents \newpage
 
 	\addcontentsline{toc}{subsection}{List of Figures}
 	\listoffigures \newpage
+	
+	\addcontentsline{toc}{subsection}{Glossary}
+	\printglossary \newpage
+	
+	\addcontentsline{toc}{subsection}{Acronyms}		
+	\printglossary[type=\acronymtype] \newpage
 
 	\addcontentsline{toc}{subsection}{Nomenclature}
 	\printnomenclature \newpage 
 
 	\pagenumbering{arabic}	
-	\input{tex/sec-introduction.tex}
-	\input{tex/sec-survey_of_methods.tex} 
-	\input{tex/sec-algorithm_walkthrough.tex}
-	\input{tex/sec-linear_programming.tex}
-	\input{tex/sec-results.tex}
+	\input{tex/sec-introduction.tex} \newpage 
+	\input{tex/sec-survey_of_methods.tex} \newpage 
+	\input{tex/sec-algorithm_walkthrough.tex} \newpage 
+	\input{tex/sec-linear_programming.tex} \newpage 
+	\input{tex/sec-implementation.tex} \newpage 
+	\input{tex/sec-results.tex} \newpage 
 	\input{tex/sec-discussion.tex} \newpage  
-	\input{tex/sec-conclusion.tex} \newpage
+	\input{tex/sec-closing_remarks.tex} \newpage
 	\input{tex/appendices.tex} \newpage
 	\addcontentsline{toc}{section}{References}
 	\bibliographystyle{ieeetr}
 	\bibliography{MHTbib}
 \end{document}
+

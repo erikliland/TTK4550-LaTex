@@ -1,0 +1,54 @@
+%!TEX root = ../TTK4550-MHT.tex
+\section{Implementation}
+\label{sec:implementation}
+The aim of this section is to elaborate the decisions that were made during the implementation of the algorithm outlined in section \ref{sec:algorithm} and \ref{sec:ilp}.
+
+\subsection{Programming language}
+This work in done as a part of a larger project (\gls{autosea}) where all code is developed in \gls{python}. \Gls{python} is known for its large pool of modules, easy portability and quick programming, which makes it a great choice for research and development of algorithms. It is far from the fastest out-of-the-box programming language available, there are however side versions of python like \gls{cython} that allows for optimisation and compilation of \gls{python} to C code. If \gls{gpu} acceleration should be possible and desirable, \gls{python} also have modules that allows for very easy and powerful usage of \gls{cuda} cores from Nvidia products.
+
+To maximize the capability with other code in this project, all implementation was done in \gls{python} 3. Further was data storage and calculations done as much as possible in modules like NumPy and SciPy, which both have excellent runtime for many common operations. 
+
+\subsection{Code structure}
+The code is structured in an object oriented style with two primary classes, a \emph{Tracker} and a \emph{Target} class. The Tracker is the class the user initializes and configures with parameters that are not target specific, like \gls{Pd}, $\lambda_\nu$, $\lambda_\phi$, $\eta^2$, $N$ and state space model. The Tracker is also the root for the track forest, that meaning that all tracks are trees of Target objects originating from a single Tracker object.
+
+When a new track is initialised, an \emph{initiateTarget} procedure is called on the tracker, and a new root for a \gls{track hypothesis tree} is created in the form of a Target object. As new \glspl{scan} are received, the trackers´ \emph{addMeasurementList} method is called with the measurements, where upon all \glspl{target} are predicted, gated, scored, pruned, selected and pruned, before the result is return to the user, see Figure \ref{fig:algorithm_flow}.
+
+\subsection{Parallel processing}
+Of the aforementioned steps, the prediction, gating and creation of new \glspl{track hypothesis} is the most time consuming. These steps will be referred to as the \emph{tree growing} task. For example, a scan which takes 1758 ms in total to process, where 1496 ms are used to grow the \gls{track hypothesis tree} when running on a single \gls{cpu} core. When utilizing multiple cores to run computation in parallel, Table \ref{tab:runtime_parallel} compares the run time averaged over 10 runs, for the same scan with different amount of parallel processes on a 4 core computer. 
+
+Since the growing task is the only part of the algorithm that is cunning on multiple cores, it is the only task that changes significantly. The multi processing of the growing task is implemented in a master-worker configuration, where the task is divided into $n-1$ equal chunks running on $n-1$ cores with the main process handling all the "worker" processes. As expected increases the runtime from one to two processes, since the entire job is copied over to another process, processed, and copied back. With any further increase in processor count, the execution time is expected to decline, which is the case. At a certain core count, the time used splitting up the task, distribute to all the cores and collecting their results will become larger than the benefit of faster computation in each core. At this point, the overhead of parallizing the work leads to starvation of the workers and increased total run-time. From Table \ref{tab:runtime_parallel_percentage}, we can see that the tree growing task is responsible for about one quarter of the run-time for this particular scan. 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c c}
+\bfseries Processes & \bfseries Total & \bfseries Grow & \bfseries Cluster & \bfseries Optimize & \bfseries Prune \\ \hline
+\csvreader[head to column names]{{data/parallelTimeLog_ITK.csv}}{}
+{\Processes & \Total & \Grow & \Cluster & \Optimize & \Prune \\\hline}
+\end{tabular}
+\caption{Runtime of a scan with different amount of processes (time in ms)}	
+\label{tab:runtime_parallel}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c}
+\bfseries Processes & \bfseries Grow & \bfseries Cluster & \bfseries Optimize & \bfseries Prune \\ \hline
+\csvreader[head to column names,respect percent=true]{{data/parallelTimeLogPercentage_ITK.csv}}{}
+{\Processes & \Grow \% & \Cluster \% & \Optimize \% & \Prune \% \\\hline }
+\end{tabular}
+\caption{Runtime distribution percentage}	
+\label{tab:runtime_parallel_percentage}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c c}
+\bfseries Processes & \bfseries Search & \bfseries Predict & \bfseries Create & \bfseries Add \\ \hline
+\csvreader[head to column names,respect percent=true]{{data/parallelTimeLogDistribution_ITK.csv}}{}
+{\Processes & \Search \% & \Predict \% & \Create \% & \Add \% \\\hline }
+\end{tabular}
+\caption{Worker runtime distribution percentage}	
+\label{tab:worker_parallel_percentage}
+\end{table}
+
+\subsection{Performance considerations}

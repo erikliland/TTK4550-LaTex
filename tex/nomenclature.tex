@@ -1,17 +1,36 @@
 %!TEX root = ../TTK4550-MHT.tex
-\nomenclature{Scan}{a procedure which measures the entire area of coverage of the system.}
-\nomenclature{Measurement}{a point in the measurement space where something is detected}
-\nomenclature{Score}{a measure of the goodness of a measurement-to-track association}
-\nomenclature{Dummy measurement}{a self created measurement at the estimated position (with score 0)}
-\nomenclature{Measurement list}{a set of measurement which originate from the same scan}
-\nomenclature{Target}{an actual object which the system is trying to track}
-\nomenclature{Track}{a list of measurement indices, one from each scan, which is believed to originate from the same target}
-\nomenclature{Gate}{an area in which a track expects and approves new measurement to associate with itself}
-\nomenclature{Track hypothesis}{a new measurement which is inside the gate for an existing track}
-\nomenclature{Measurement noise}{Also called observation noise, which is noise that affects the accuracy of the measurement not the existence. White Gaussian with zero mean and covariance $R$}
-\nomenclature{System noise}{Also called process noise, which is noise in the model behaviour. This noise compensates for the uncertainty and non-modelled dynamics of the true system}
-\nomenclature{Clutter}{Noise in the form of false measurements which is assumed Poison distributed}
-\nomenclature{ASV}{Autonomous Surface Vessel}
-\nomenclature{NTNU}{Norwegian University of Science and Technology}
-\nomenclature{AMOS}{Centre for autonomous marine operations and systems}
-\nomenclature{AUTOSEA}{A collaborative research and development project between NTNU AMOS  and the Norwegian maritime industry with aim to attain world leading knowledge in design and verification of control systems for ASVs}
+
+\nomenclature{$i$}{Measurement index}
+\nomenclature{$m_k$}{Number of measurements in scan k}
+\nomenclature{$t$}{Time}
+\nomenclature{$k$}{Time index}
+\nomenclature{$j$}{Target index}
+\nomenclature{$t_k$}{Time at time index}
+\nomenclature{$l$}{Hypothesis index}
+\nomenclature{$\V{x}$}{State vector}
+\nomenclature{$\bar{\V{x}}$}{Predicted state}
+\nomenclature{$\hat{\V{x}}$}{Filtered state}
+\nomenclature{$\M{P}$}{State covariance}
+\nomenclature{$\M{\bar{P}}$}{Predicted state covariance}
+\nomenclature{$\M{\hat{P}}$}{Filtered state covariance}
+\nomenclature{$\V{z}_k$}{Measurement at time step $k$}
+\nomenclature{$\M{H}$}{State observation matrix}
+\nomenclature{$\M{Q}$}{State covariance matrix}
+\nomenclature{$\M{R}$}{Measurement covariance matrix}
+\nomenclature{$\M{S}$}{Residual covariance}
+\nomenclature{$\M{K}$}{Kalman gain}
+\nomenclature{$\V{\nu}$}{Weighted measurement innovation}
+\nomenclature{$\mathrm{NLLR}_{i,j}(k)$}{Negative Log Likelihood Ratio for target $j$ at time $k$ for measurement $i$}
+\nomenclature{$\mathrm{cNLLR}$}{Cumulative Negative Log Likelihood Ratio for target}
+\nomenclature{$\V{\tau}$}{Binary vector where the selected track hypotheses are $1$}
+\nomenclature{$\M{\Gamma}$}{Disturbance matrix}
+\nomenclature{$\M{\Phi}$}{State transition matrix}
+\nomenclature{$\V{w}$}{Process noise}
+\nomenclature{$\V{v}$}{Observation noise}
+\nomenclature{$N$}{Number of scans to keep in track tree}
+\nomenclature{$M$}{Number of leaf nodes (\glspl{track hypothesis} in the \gls{track forest})}
+\nomenclature{$N_1$}{Number of real measurements in \gls{cluster}}
+\nomenclature{$N_2$}{Number of targets in \gls{cluster}}
+
+
+%\nomenclature{}{}

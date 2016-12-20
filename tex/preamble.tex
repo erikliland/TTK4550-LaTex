@@ -3,8 +3,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[hidelinks]{hyperref}
 \usepackage{commath}
+
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{mathrsfs}
@@ -16,20 +16,23 @@
 \usepackage{subcaption}
 \usepackage{cite}
 \usepackage{amsmath}
+\usepackage{csvsimple}
 \usepackage{multicol}
 \usepackage{color}
 \usepackage{dirtytalk}
 \usepackage{float}
 \usepackage{flafter}
 \usepackage{csquotes}
-\graphicspath{{Figures/}{./Figures/}}
-\usepackage[refpage]{nomencl} \makenomenclature
-\usepackage{glossaries}\input{tex/nomenclature.tex}
 \usepackage{listings}
 \usepackage[toc, page]{appendix}
-%\usepackage{minted}
+\usepackage[nonumberlist,acronym]{glossaries}
+\usepackage{nomencl}
+
 
 \linespread{1.3}
+\graphicspath{{Figures/}{./Figures/}}
 
+\makeglossaries
+\makenomenclature
 
-% makeindex TTK4550-MHT.nlo -s nomencl.ist -o TTK4550-MHT.nls
+\usepackage[hidelinks]{hyperref}
