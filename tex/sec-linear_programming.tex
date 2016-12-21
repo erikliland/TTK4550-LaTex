@@ -1,12 +1,12 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Linear programming}
 \label{sec:ilp}
-The aim of this section is to elaborate the use of \gls{lp} to solve the data association problem in \gls{mht} that arises when there are multiple (possible mutual exclusive) possibilities of measurement arrangements within the existing set of tracks. As with any optimization problem, we need an objective function which tells us how good or bad a given assignment is, and a set of constraints that limits the solution to physical limits and our assumptions.
+The aim of this section is to elaborate the use of \gls{lp} to solve the data association problem in \gls{mht} that arises when there are multiple, possibly mutual exclusive, possibilities of measurement arrangements within the existing set of tracks. As with any optimization problem, an objective function indicating how good or bad a given assignment is, and a set of constraints that limits the solution to physical limits and our assumptions are needed.
 
 \subsection{Problem formulation}
-Multiple optimization formulations of the association problem for multi-target tracking have been proposed through the history. The first was \cite{Morefield1977} where a 0-1 \gls{ilp} was proposed, later an \gls{ilp} scheme with \gls{lp} relaxation and \gls{grp} as solver was proposed by \cite{Storms2003}, and a framework for both association and removal of competing tracks were proposed by \cite{Coraluppi2004}.
+Multiple optimization formulations of the association problem for multi-target tracking have been proposed through the history. The first was Morefield \cite{Morefield1977} proposing  a 0-1 \gls{ilp}, later an \gls{ilp} scheme with \gls{lp} relaxation and \gls{grp} as solver was proposed by Storms and Spieksma \cite{Storms2003}, and a framework for both association and removal of competing tracks were proposed by Coraluppi \cite{Coraluppi2004}.
 
-All three mentioned publications have essentially the same objective functions, though some use minimize and other use maximize in their formulation. The essence of them all is (\ref{eq:general_objective_funtion}), where $\V{c}$ is a vector of costs (minimize) or scores (maximize) and $\V{\tau}$ is a selection vector, where each row in $\V{c}$ and $\V{\tau}$ represents one branch in the track hypothesis tree.
+All the three publications have essentially the same objective functions, though some use minimize and other use maximize in their formulation. The essence of them all is (\ref{eq:general_objective_funtion}), where $\V{c}$ is a vector of costs (minimize) or scores (maximize) and $\V{\tau}$ is a selection vector, where each row in $\V{c}$ and $\V{\tau}$ represents one branch in the track hypothesis tree.
 \begin{equation}
 \begin{aligned}
 & \underset{\V{\tau}}{\text{min}}
@@ -31,7 +31,7 @@ Further, the constraints that shall ensure that each measurement is not assigned
 \end{aligned}
 \label{eq:general_constraints_inequality}
 \end{equation}
-The difference between (\ref{eq:general_constraints_equality}) and (\ref{eq:general_constraints_inequality}) originates in some fundamental assumptions in different \gls{mht} versions. When used on a \gls{homht} tree, (\ref{eq:general_constraints_equality}) includes track initialization since it demands that all measurements must be assigned. On the other hand, both (\ref{eq:general_constraints_inequality}) and (\ref{eq:my_constraints}) requires a-priori knowledge about the number of tracks.
+The difference between (\ref{eq:general_constraints_equality}) and (\ref{eq:general_constraints_inequality}) originates in some fundamental assumptions in different \gls{mht} versions. When used on a \gls{homht} tree, (\ref{eq:general_constraints_equality}) includes track initialization since the equality demands that all measurements must be assigned. On the other hand, both (\ref{eq:general_constraints_inequality}) and (\ref{eq:my_constraints}) requires a-priori knowledge about the number of tracks.
 
 In this work, the problem is formulated slightly different, in that there are two sets of constraints (\ref{eq:my_constraints}), one equality and one inequality. The inequality constraints $\M{A_1} \V{\tau} \leq \V{b_1}$ ensures that each measurement are maximum (but not minimum) used one time. The equality constraints $\M{A_2} \V{\tau} = \V{b_2}$ ensures that minimum and maximum one track from each track tree is selected. The complete \gls{ilp} formulation becomes (\ref{eq:my_constraints}), where $\V{\tau}$ is a binary vector with dimension equal the number of leaf nodes in the track forest.
 \begin{equation}
@@ -78,11 +78,11 @@ $\M{A_1}$ is a $N_1 \times M$ binary matrix with $N_1$ real measurements and $M$
 \label{eq:example_matrices}
 \end{equation}
 
-The explicit enumeration that becomes necessary when creating these $\M{A}$ matrices is exhaustive since dimension of $\V{\tau}$, which is equal to the number of leaf nodes in the track forest, can be very large. Both $\M{A}_1$ and $\M{A}_2$ grows quadratically with the number of track hypotheses and real measurements or number of targets respectively.
+The explicit enumeration that becomes necessary when creating these $\M{A}$ matrices is exhaustive since the dimension of $\V{\tau}$, which is equal to the number of leaf nodes in the track forest, can be very large. Both $\M{A}_1$ and $\M{A}_2$ grows quadratically with the number of track hypotheses and real measurements or number of targets respectively.
 % $N_1$ is proportional with the number of targets and history steps (N-scan). 
 
 \subsection{Solvers}
-There are a lot of of-the-shelf \gls{ilp} and \gls{milp} solvers on the marked, both free open source and commercial. Since our problem is formulated on standard form, it can easily be executed on several solvers, and we can compare runtime and performance. In this report, the following solvers are tested:
+There are a lot of off-the-shelf \gls{ilp} and \gls{milp} solvers on the marked, both free open source and commercial. Since the problem in this report is formulated on standard form, it can easily be executed on several solvers, and we can compare runtime and performance. To have the broadest possible test suite, both free and commercial solvers are used. As every solver have different approached to how they pre-process, divide and solve problems, their performance can vary from situation to situation. The following solvers are tested in this work.
 \begin{itemize}
 \item CBC 		(Free, COIN-OR)
 \item CPLEX 	(Commercial (Free academic),  IBM)

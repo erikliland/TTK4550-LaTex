@@ -1,20 +1,18 @@
 %!TEX root = ../TTK4550-MHT.tex
 \section{Introduction}
 \subsection{Motivation}
-This report is the result of TTK4550 Engineering cybernetics specialization report at \gls{ntnu}, where the aim is to \emph{let the student specialize in a selected area based on scientific methods, collect supplementary information based on literature search and other sources and combine this with own knowledge into a project report}\footnote{http://www.ntnu.edu/studies/courses/TTK4550}. The learning outcome of this project is to give the student an extensive knowledge in a current problem, good knowledge in related topics and relevant scientific literature.
+An \gls{asv} is an unmanned vessel which can for instance be used to transport cargo and people, as well as for surveillance and other tasks. To avoid collisions and dangerous situations with other vessels, the route planner needs a real time image of its surroundings in addition to map data. In the maritime environment, this is primarily done by \glspl{radar} mounted on the ship itself. All commercial maritime vessels and vessels over 15 meter are also required to have an \gls{ais} installed, and with \gls{ais} being more and more common in leisure vessels, its usefulness in anti collision perspective increases.
 
 \subsection{Problem description}
-The proposed title for this project, and the following master-thesis, was "Multi-target tracking using \gls{radar} and AIS". The key idea behind this formulation is that \gls{radar} and the maritime \gls{ais} have different strengths and weaknesses, and if utilized properly, the strengths of both system can be exploited, while the weaknesses can be reduced. For this project it was decided to focus fully on the gold standard within multi-target tracking, namely \gls{mht} . To ensure the tracking system would be sufficiently understood, correctly implemented and thoroughly tested, the \gls{ais} integration was postponed to the master thesis.
+The proposed title for this project, and the following master-thesis, was "Multi-target tracking using \gls{radar} and AIS". The key idea behind this formulation is that \gls{radar} and the maritime \gls{ais} have different strengths and weaknesses, and if utilized properly, the strengths of both systems can be exploited, while the weaknesses can be reduced. For this specialization project, it was decided to focus fully on the gold standard within multi-target tracking, namely \gls{mht} . To ensure the tracking system would be sufficiently understood, correctly implemented and thoroughly tested, the \gls{ais} integration was postponed to the master thesis. The following tasks was proposed for this project:
 
-The following task was proposed for this project:
 \begin{itemize}
-\item Write a survey on multi-target and multi-sensor tracking methods.
-\item Implement a multi-target tracking method.
-\item Describe the method and summarize the findings in a report.
+\item Write a survey on multi-target and multi-sensor tracking methods
+\item Implement a multi-target tracking method
+\item Describe the method and summarize the findings in a report
 \end{itemize}
 
-\subsection{Goals}
-The goals for this project is to implement a \gls{tomht} algorithm in Python, test this with simulated data and analyze the performance for different conditions and discuss methods for improvement.
+The goals for this project is to implement a \gls{tomht} algorithm in Python, test it with simulated data, analyse the performance for different conditions and discuss methods for improvement.
 
 \subsection{Outline of report}
-In section \ref{sec:survey}, different methods for target tracking and data association are presented. Here the focus is to highlight the key difference between the most common tracking methods with focus on the properties these lead to. In section \ref{sec:algorithm}, a \gls{tomht} is thoroughly explained, and in section \ref{sec:ilp} the integer optimization problem that arises in section \ref{sec:algorithm} is elaborated. The implementation of the outlined algorithm is presented on a structural and pseudo-code level in section \ref{sec:implementation}. Whereon the simulation and results are presented in section \ref{sec:results} and discussed in section \ref{sec:discussion}.
+In section \ref{sec:survey}, different methods for target tracking and data association are presented. Here, the focus is to highlight the key difference between the most common tracking methods with particular attention on the properties these lead to. In section \ref{sec:algorithm}, a \gls{tomht} is thoroughly explained, and in section \ref{sec:ilp} the integer optimization problem that arises in section \ref{sec:algorithm} is elaborated. The implementation of the outlined algorithm is presented on a structural and pseudo-code level in section \ref{sec:implementation}. At last, the simulation and results are presented in section \ref{sec:results} and discussed in section \ref{sec:discussion}.

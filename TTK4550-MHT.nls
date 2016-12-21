@@ -2,29 +2,62 @@
 
  \nomgroup{A}
 
-  \item [{Clutter}]\begingroup Noise in the form of false measurements which is assumed Poison distributed\nomeqref {0}
+  \item [{$\bar{\V{x}}$}]\begingroup Predicted state\nomeqref {0}
 		\nompageref{i}
-  \item [{Dummy measurement}]\begingroup a self created measurement at the estimated position (with score 0)\nomeqref {0}
+  \item [{$\hat{\V{x}}$}]\begingroup Filtered state\nomeqref {0}
 		\nompageref{i}
-  \item [{Gate}]\begingroup an area in which a track expects and approves new measurement to associate with itself\nomeqref {0}
+  \item [{$\mathrm{cNLLR}$}]\begingroup Cumulative Negative Log Likelihood Ratio\nomeqref {0}
 		\nompageref{i}
-  \item [{Measurement}]\begingroup a point in the measurement space where something is detected\nomeqref {0}
+  \item [{$\mathrm{NLLR}_{i,j}(k)$}]\begingroup Negative Log Likelihood Ratio for target $j$ at time $k$ for measurement $i$\nomeqref {0}
 		\nompageref{i}
-  \item [{Measurement list}]\begingroup a set of measurement which originate from the same scan\nomeqref {0}
+  \item [{$\M{\bar{P}}$}]\begingroup Predicted state covariance\nomeqref {0}
 		\nompageref{i}
-  \item [{Measurement noise}]\begingroup Also called observation noise, which is noise that affects the accuracy of the measurement not the existence. White Gaussian with zero mean and covariance $R$\nomeqref {0}
+  \item [{$\M{\Gamma}$}]\begingroup Disturbance matrix\nomeqref {0}
 		\nompageref{i}
-  \item [{Scan}]\begingroup a procedure which measures the entire area of coverage of the system.\nomeqref {0}
+  \item [{$\M{\hat{P}}$}]\begingroup Filtered state covariance\nomeqref {0}
 		\nompageref{i}
-  \item [{Score}]\begingroup a measure of the goodness of a measurement-to-track association\nomeqref {0}
+  \item [{$\M{\Phi}$}]\begingroup State transition matrix\nomeqref {0}
 		\nompageref{i}
-  \item [{System noise}]\begingroup Also called process noise, which is noise in the model behaviour. This noise compensates for the uncertainty and non-modelled dynamics of the true system\nomeqref {0}
+  \item [{$\M{H}$}]\begingroup State observation matrix\nomeqref {0}
 		\nompageref{i}
-  \item [{Target}]\begingroup an actual object which the system is trying to track\nomeqref {0}
+  \item [{$\M{K}$}]\begingroup Kalman gain\nomeqref {0}\nompageref{i}
+  \item [{$\M{Q}$}]\begingroup Process noise covariance matrix\nomeqref {0}
 		\nompageref{i}
-  \item [{Track}]\begingroup a list of measurement indices, one from each scan, which is believed to originate from the same target\nomeqref {0}
+  \item [{$\M{R}$}]\begingroup Measurement covariance matrix\nomeqref {0}
 		\nompageref{i}
-  \item [{Track hypothesis}]\begingroup a new measurement which is inside the gate for an existing track\nomeqref {0}
+  \item [{$\M{S}$}]\begingroup Residual covariance\nomeqref {0}
+		\nompageref{i}
+  \item [{$\V{\hat{z}}_k$}]\begingroup Predicted measurement at time step $k$\nomeqref {0}
+		\nompageref{i}
+  \item [{$\V{\nu}_k$}]\begingroup Weighted measurement innovation for time step $k$\nomeqref {0}
+		\nompageref{i}
+  \item [{$\V{\tau}$}]\begingroup Binary vector where the selected track hypotheses are $1$\nomeqref {0}
+		\nompageref{i}
+  \item [{$\V{\tilde{y}}_k^i$}]\begingroup Measurement innovation for measurement $i$ at time step $k$\nomeqref {0}
+		\nompageref{i}
+  \item [{$\V{v}$}]\begingroup Observation noise\nomeqref {0}
+		\nompageref{i}
+  \item [{$\V{w}$}]\begingroup Process noise\nomeqref {0}\nompageref{i}
+  \item [{$\V{x}$}]\begingroup State vector\nomeqref {0}\nompageref{i}
+  \item [{$\V{z}_k$}]\begingroup Measurement at time step $k$\nomeqref {0}
+		\nompageref{i}
+  \item [{$i$}]\begingroup Measurement index\nomeqref {0}\nompageref{i}
+  \item [{$j$}]\begingroup Target index\nomeqref {0}\nompageref{i}
+  \item [{$k$}]\begingroup Time index\nomeqref {0}\nompageref{i}
+  \item [{$l$}]\begingroup Hypothesis index\nomeqref {0}\nompageref{i}
+  \item [{$M$}]\begingroup Number of leaf nodes (\glspl{track hypothesis} in the \gls{track forest})\nomeqref {0}
+		\nompageref{i}
+  \item [{$m_k$}]\begingroup Number of measurements in scan k\nomeqref {0}
+		\nompageref{i}
+  \item [{$ms$}]\begingroup Millisecond\nomeqref {0}\nompageref{i}
+  \item [{$N$}]\begingroup Number of scans to keep in track tree\nomeqref {0}
+		\nompageref{i}
+  \item [{$N_1$}]\begingroup Number of real measurements in \gls{cluster}\nomeqref {0}
+		\nompageref{i}
+  \item [{$N_2$}]\begingroup Number of targets in \gls{cluster}\nomeqref {0}
+		\nompageref{i}
+  \item [{$t$}]\begingroup Time\nomeqref {0}\nompageref{i}
+  \item [{$t_k$}]\begingroup Time at time index\nomeqref {0}
 		\nompageref{i}
 
 \end{thenomenclature}

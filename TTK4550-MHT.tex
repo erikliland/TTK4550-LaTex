@@ -10,25 +10,34 @@
 \begin{document}
 	\pagenumbering{roman}
 	\input{tex/titlepage.tex}
+	\null \newpage
 
-	\addtocounter{page}{1}
-	\input{tex/sec-abstract.tex}
-	\glsresetall	
+	\addtocounter{page}{0}
+	\input{tex/sec-preface.tex} \clearpage
+	\null \newpage
+	
+	\input{tex/sec-abstract.tex} \clearpage
+	%\null \newpage	
+	
+	\glsresetall
 	
 	\addcontentsline{toc}{subsection}{Table of Contents} 
-	\tableofcontents \newpage
+	\tableofcontents \clearpage
 
 	\addcontentsline{toc}{subsection}{List of Figures}
-	\listoffigures \newpage
+	\listoffigures \clearpage
+	
+	\addcontentsline{toc}{subsection}{List of Tables}
+	\listoftables \clearpage
 	
 	\addcontentsline{toc}{subsection}{Glossary}
-	\printglossary \newpage
+	\printglossary \clearpage
 	
 	\addcontentsline{toc}{subsection}{Acronyms}		
-	\printglossary[type=\acronymtype] \newpage
+	\printglossary[type=\acronymtype,nopostdot] \clearpage
 
 	\addcontentsline{toc}{subsection}{Nomenclature}
-	\printnomenclature \newpage 
+	\printnomenclature[2.5 cm]  \clearpage 
 
 	\pagenumbering{arabic}	
 	\input{tex/sec-introduction.tex} \clearpage 
